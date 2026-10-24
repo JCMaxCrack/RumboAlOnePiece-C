@@ -2,7 +2,6 @@
 .godot/
 .import/
 export_credentials.cfg
-*.translation
 
 # Exported builds
 /builds/

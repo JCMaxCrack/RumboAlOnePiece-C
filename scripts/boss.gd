@@ -26,8 +26,8 @@ signal taunt(text: String)
 
 enum State { PATROL, ALERT, CHASE, ATTACK, SPECIAL, RETURN, DEFEATED }
 
-const STATE_TEXT := {State.PATROL: "Patrullando", State.ALERT: "¡Te vio!", State.CHASE: "¡Persiguiendo!", State.ATTACK: "¡Atacando!",
-	State.SPECIAL: "¡Ataque especial!", State.RETURN: "Regresando", State.DEFEATED: "Derrotado"}
+const STATE_TEXT := {State.PATROL: "Patrolling", State.ALERT: "He saw you!", State.CHASE: "Chasing!", State.ATTACK: "Attacking!",
+	State.SPECIAL: "Special attack!", State.RETURN: "Returning", State.DEFEATED: "Defeated"}
 
 @export var display_name := "Kuro"
 @export var anim_library := "kuro"
@@ -136,7 +136,7 @@ func receive_hit(amount: float, from_pos: Vector3) -> void:
 		return
 	if not enraged and health <= max_health * rage_at:
 		enraged = true
-		taunt.emit("¡Ahora sí me hiciste enojar!")
+		taunt.emit("Now you made me angry!")
 		roar_sound.play()
 	# he always goes after the one who hit him
 	var attacker := _closest_player(4.0, false)
@@ -180,7 +180,7 @@ func _dodge(from_pos: Vector3) -> void:
 	var side := away.normalized().cross(Vector3.UP) * (1.0 if randf() < 0.5 else -1.0)
 	FX.burst(get_parent(), global_position + Vector3(0, 1.0, 0), Color(0.1, 0.1, 0.12), 14, 3.0, 0.12, 0.0, 0.35)
 	global_position += side * 2.2
-	FX.text(get_parent(), global_position + Vector3(0, 2.4, 0), tr("¡Demasiado lento!"), Color(0.8, 0.85, 1.0), 40)
+	FX.text(get_parent(), global_position + Vector3(0, 2.4, 0), tr("Too slow!"), Color(0.8, 0.85, 1.0), 40)
 
 
 # ------------------------------------------------------------------ states
@@ -330,12 +330,12 @@ func _start_special() -> void:
 			FX.burst(get_parent(), global_position + Vector3(0, 1.0, 0), Color(0.08, 0.08, 0.1), 24, 4.0, 0.15, 0.0, 0.4)
 			if _target_ok():
 				facing = _dir_to(target.global_position)
-			taunt.emit("¡Shakushi!")
+			taunt.emit("Shakushi!")
 			_play("special", true))
 	else:
 		# Puño del amor: a warning ring where the player is, then the blow
 		FX.ring(get_parent(), _special_target, special_radius, Color(1, 0.3, 0.2, 0.9), 0.9)
-		taunt.emit("¡Puño del amor!")
+		taunt.emit("Fist of Love!")
 		facing = _dir_to(_special_target)
 		_play("special", true)
 	swing_sound.play()

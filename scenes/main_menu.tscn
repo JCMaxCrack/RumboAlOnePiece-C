@@ -43,7 +43,7 @@ offset_right = 300.0
 offset_bottom = 110.0
 theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
 theme_override_font_sizes/font_size = 30
-text = "RUMBO AL"
+text = "FINDING THE"
 horizontal_alignment = 1
 
 [node name="Title" type="Label" parent="." unique_id=152159668]
@@ -69,7 +69,7 @@ offset_right = 300.0
 offset_bottom = 235.0
 theme_override_colors/font_color = Color(0.72, 0.74, 0.8, 1)
 theme_override_font_sizes/font_size = 20
-text = "BETA · La misión de Koby"
+text = "BETA · Koby's Mission"
 horizontal_alignment = 1
 
 [node name="MenuPanel" type="PanelContainer" parent="." unique_id=358167378]
@@ -90,22 +90,22 @@ theme_override_constants/separation = 10
 [node name="PlayButton" type="Button" parent="MenuPanel/VBox" unique_id=1800050192]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Jugar"
+text = "Play"
 
 [node name="ControlsButton" type="Button" parent="MenuPanel/VBox" unique_id=497101732]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Controles"
+text = "Controls"
 
 [node name="OptionsButton" type="Button" parent="MenuPanel/VBox" unique_id=2146560129]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Opciones"
+text = "Options"
 
 [node name="QuitButton" type="Button" parent="MenuPanel/VBox" unique_id=1012483671]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Salir"
+text = "Quit"
 
 [node name="ControlsPanel" type="PanelContainer" parent="." unique_id=14210955]
 visible = false
@@ -127,28 +127,28 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
 theme_override_font_sizes/font_size = 26
-text = "Controles"
+text = "Controls"
 
 [node name="Text" type="Label" parent="ControlsPanel/VBox" unique_id=1100232707]
 custom_minimum_size = Vector2(540, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
 theme_override_font_sizes/font_size = 17
-text = "Habla con Koby: te pedirá derrotar a Buggy y recolectar toda la carne (cada carne te cura).
+text = "Talk to Koby on every island: he gives you its mission.
 
-WASD / flechas: mover  ·  Shift: correr
-Espacio: saltar (en el agua: impulso)
-Clic izquierdo / J: Gomu Gomu no Pistol
-E: hablar  ·  Mouse: cámara  ·  Esc: pausa
-F1: mostrar u ocultar la IA de Buggy
+WASD / arrows: move  ·  Shift: run
+Space: jump (in the water: swim up)
+Left click / J: attack  ·  R: skill  ·  F: switch skill  ·  K: skill shop
+Q: eat  ·  Tab: switch item  ·  M: map
+E: talk / take the helm  ·  Mouse: camera  ·  Esc: pause
 
-En el teléfono: joystick a la izquierda, arrastra a la derecha para la cámara y usa los botones."
+On a phone: joystick on the left, drag on the right for the camera and use the buttons."
 autowrap_mode = 3
 
 [node name="BackButton" type="Button" parent="ControlsPanel/VBox" unique_id=610512963]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Volver"
+text = "Back"
 
 [node name="ModePanel" type="PanelContainer" parent="." unique_id=1474062645]
 visible = false
@@ -170,16 +170,16 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
 theme_override_font_sizes/font_size = 28
-text = "¿Cómo quieres jugar?"
+text = "How do you want to play?"
 horizontal_alignment = 1
 
 [node name="SoloButton" type="Button" parent="ModePanel/VBox" unique_id=599244459]
 layout_mode = 2
-text = "Un jugador"
+text = "Single player"
 
 [node name="CoopButton" type="Button" parent="ModePanel/VBox" unique_id=2006795252]
 layout_mode = 2
-text = "Cooperativo (2 jugadores)"
+text = "Co-op (2 players)"
 
 [node name="Info" type="Label" parent="ModePanel/VBox" unique_id=1852359234]
 custom_minimum_size = Vector2(500, 90)
@@ -190,7 +190,7 @@ autowrap_mode = 3
 
 [node name="BackButton" type="Button" parent="ModePanel/VBox" unique_id=231337459]
 layout_mode = 2
-text = "Volver"
+text = "Back"
 
 [node name="SaveSlots" parent="." unique_id=1879231917 instance=ExtResource("3_8ln24")]
 layout_mode = 1

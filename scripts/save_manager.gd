@@ -30,23 +30,25 @@ extends Node
 ## Note: like any game that saves on the player's device, someone who decompiles the game could
 ## find how the key is made; the signature stops editing the JSON by hand (the usual cheat).
 ##
-## Version 3 (several islands) document:
-##   {"version": 3, "slot", "saved_at", "play_time", "completed": the whole voyage is finished,
-##    "island": island being played, "health",
-##    "player": {"level", "xp", "points", "skills", "equipped", "inventory": [[id, count] x 4],
-##               "crew", "unlocked", "done"},
+## Version 4 document:
+##   {"version": 4, "slot", "saved_at", "play_time", "completed": the whole voyage is finished,
+##    "island": island being played,
+##    "voyage": {"crew", "unlocked", "done"},
+##    "heroes": one per player (2 = local co-op): [{"character", "level", "xp", "points", "skills",
+##              "equipped", "inventory": [[id, count] x 4], "health"}, ...],
 ##    "islands": {"isla_inicio": {"mission", "checkpoint", "checkpoints", "items", "boss_health",
 ##                                "boss_defeated", "recruited", "flags"}, "villa_syrup": {...}, ...}}
-## Documents of versions 1 and 2 (only the first island) are still valid: they keep their own
-## signature and are turned into version 3 when they are read (upgrade()).
+## Documents of versions 1, 2 (only the first island) and 3 (one player) are still valid: they
+## keep their own signature and are turned into version 4 when they are read (upgrade()).
 
 enum SlotStatus { EMPTY, VALID, TAMPERED }
 
 const SLOT_COUNT := 4
 const FILE_PATH := "user://saves/partidas.json"
 ## 2 = Zoro added ("zoro": recruited). 3 = several islands, inventory, experience and skills.
-## Saves of versions 1 and 2 are still valid (see upgrade()).
-const VERSION := 3
+## 4 = every player has his own character, inventory, experience and skills (co-op).
+## Saves of older versions are still valid (see upgrade()).
+const VERSION := 4
 ## Ids of the Checkpoint nodes of scenes/islands/isla_inicio.tscn (anything else in a save is rejected).
 const CHECKPOINT_IDS := ["playa_sur", "entrada_crater", "muelle", "peninsula_oeste", "bosque_noroeste", "costa_este"]
 const FIRST_CHECKPOINT := "playa_sur"
@@ -60,11 +62,8 @@ const ISLAND_SPECS := {
 	"villa_syrup": {"checkpoints": ["puerto_syrup", "aldea_syrup", "colina_syrup", "jardin_mansion"],
 		"items": ["Meat1", "Meat2", "Meat3", "Meat4", "Meat5", "Meat6", "Meat7", "Meat8", "Orange1", "Orange2", "Orange3", "KeyChest"], "boss_max": 420.0, "flags": ["gate_open"]},
 	"whisky_peak": {"checkpoints": ["puerto_whisky", "arco_whisky", "plaza_whisky", "cactus_whisky"],
-		"items": ["Meat1", "Meat2", "Meat3", "Meat4", "Meat5", "Meat6", "Meat7", "Meat8", "Orange1", "Orange2", "Orange3", "Orange4", "Orange5"], "boss_max": 480.0, "flags": ["oranges_given"]},
+		"items": ["Meat1", "Meat2", "Meat3", "Meat4", "Meat5", "Meat6", "Meat7", "Meat8", "Orange1", "Orange2", "Orange3", "Orange4", "Orange5"], "boss_max": 720.0, "flags": ["oranges_given"]},
 }
-## Luffy's health grows a little with every level.
-const HEALTH_PER_LEVEL := 5.0
-
 ## Slot used by the game that is being played (0 = none, nothing is saved).
 var current_slot := 0
 ## Progress to apply when scenes/world.tscn starts (filled by load_game()).
@@ -94,7 +93,7 @@ func write_slot(slot: int, data: Dictionary) -> bool:
 	doc["slot"] = slot
 	doc["saved_at"] = int(Time.get_unix_time_from_system())
 	doc = _normalize(doc)
-	if not _valid_v3(doc, slot):
+	if not _valid_v4(doc, slot):
 		push_error("SaveManager: refusing to save invalid data %s" % doc)
 		return false
 	var db := _read_db()
@@ -117,16 +116,21 @@ func start_new_game(slot: int) -> void:
 	GameState.reset()
 
 
-## "Cargar": only valid slots of games that are not finished can be loaded. The voyage (GameState)
-## is restored here; the world scene restores the rest with take_pending().
+## "Load": only valid slots of games that are not finished can be loaded. A co-op game (two
+## heroes) needs a gamepad for player 2. The game mode and the characters come from the save; the
+## voyage (GameState) is restored here; the world scene restores the rest with take_pending().
 func load_game(slot: int) -> bool:
 	var info := read_slot(slot)
 	if info.status != SlotStatus.VALID or bool(info.data.get("completed", false)):
 		return false
+	var heroes: Array = info.data.heroes
+	if heroes.size() > 1 and not GameSession.can_play_coop():
+		return false
+	GameSession.start(heroes.size() > 1)
+	GameSession.characters = heroes.map(func(h): return str(h.character))
 	current_slot = slot
 	_pending = info.data
-	GameState.restore(info.data.player, str(info.data.island), info.data.islands, float(info.data.play_time))
-	GameState.health = float(info.data.health)
+	GameState.restore(info.data.voyage, heroes, str(info.data.island), info.data.islands, float(info.data.play_time))
 	return true
 
 
@@ -135,10 +139,21 @@ func set_pending(data: Dictionary) -> void:
 	_pending = data
 
 
-## A document of version 1 or 2 (only the first island) as a version 3 one.
+## An older document as a version 4 one.
 func upgrade(d: Dictionary) -> Dictionary:
-	if int(d.get("version", VERSION)) >= 3:
+	var version := int(d.get("version", VERSION))
+	if version >= 4:
 		return d
+	if version == 3:
+		var p: Dictionary = d.player
+		return {
+			"version": VERSION, "slot": d.slot, "saved_at": d.saved_at, "play_time": d.play_time,
+			"completed": d.completed, "island": d.island,
+			"voyage": {"crew": p.crew, "unlocked": p.unlocked, "done": p.done},
+			"heroes": [{"character": "luffy", "level": p.level, "xp": p.xp, "points": p.points, "skills": p.skills,
+				"equipped": p.equipped, "inventory": p.inventory, "health": d.health}],
+			"islands": d.islands,
+		}
 	var zoro := bool(d.get("zoro", false))
 	var inv := []
 	for i in 4:
@@ -146,9 +161,9 @@ func upgrade(d: Dictionary) -> Dictionary:
 	var done := ["isla_inicio"] if bool(d.completed) else []
 	return {
 		"version": VERSION, "slot": d.slot, "saved_at": d.saved_at, "play_time": d.play_time,
-		"completed": false, "island": "isla_inicio", "health": d.health,
-		"player": {"level": 1, "xp": 0, "points": 0, "skills": [], "equipped": "", "inventory": inv,
-			"crew": ["zoro"] if zoro else [], "unlocked": ["isla_inicio", "villa_syrup"] if bool(d.completed) else ["isla_inicio"], "done": done},
+		"completed": false, "island": "isla_inicio",
+		"voyage": {"crew": ["zoro"] if zoro else [], "unlocked": ["isla_inicio", "villa_syrup"] if bool(d.completed) else ["isla_inicio"], "done": done},
+		"heroes": [{"character": "luffy", "level": 1, "xp": 0, "points": 0, "skills": [], "equipped": "", "inventory": inv, "health": d.health}],
 		"islands": {"isla_inicio": {"mission": 2 if bool(d.completed) else d.mission, "checkpoint": d.checkpoint, "checkpoints": d.checkpoints,
 			"items": d.meat, "boss_health": d.boss_health, "boss_defeated": d.boss_defeated, "recruited": zoro, "flags": []}},
 	}
@@ -228,7 +243,10 @@ func _check_slot(db: Dictionary, slot: int) -> Dictionary:
 	if doc["signature"] != _sign(slot, data):
 		return bad
 	var version := int(data.get("version", 0)) if _is_number(data.get("version")) else 0
-	if version >= 3:
+	if version >= 4:
+		if not _valid_v4(data, slot):
+			return bad
+	elif version == 3:
 		if not _valid_v3(data, slot):
 			return bad
 	elif not _valid_data(data, slot):
@@ -338,25 +356,88 @@ func _valid_v3(d: Dictionary, slot: int) -> bool:
 		return false
 	if not _is_number(p.level) or int(p.level) < 1 or int(p.level) > 30:
 		return false
-	if not _is_number(d.health) or float(d.health) <= 0.0 or float(d.health) > PLAYER_MAX_HEALTH + HEALTH_PER_LEVEL * (int(p.level) - 1):
+	if not _is_number(d.health) or float(d.health) <= 0.0 or float(d.health) > PLAYER_MAX_HEALTH + GameState.HEALTH_PER_LEVEL * (int(p.level) - 1):
 		return false
-	if not _is_number(p.xp) or int(p.xp) < 0 or int(p.xp) >= 40 + 30 * (int(p.level) - 1):
+	if not _valid_skills(p, "luffy") or not _valid_inventory(p.inventory):
+		return false
+	return _valid_voyage(d, p, [])
+
+
+## Validation of a version 4 document (one hero per player).
+func _valid_v4(d: Dictionary, slot: int) -> bool:
+	var keys := ["version", "slot", "saved_at", "play_time", "completed", "island", "voyage", "heroes", "islands"]
+	for k in keys:
+		if not d.has(k):
+			return false
+	if d.size() != keys.size():
+		return false
+	if not _is_number(d.version) or int(d.version) != 4 or not _is_number(d.slot) or int(d.slot) != slot:
+		return false
+	if not _is_number(d.saved_at) or not _is_number(d.play_time) or float(d.play_time) < 0.0 or float(d.play_time) > 1.0e7:
+		return false
+	if typeof(d.completed) != TYPE_BOOL or typeof(d.island) != TYPE_STRING or not ISLAND_SPECS.has(d.island):
+		return false
+	if typeof(d.voyage) != TYPE_DICTIONARY or typeof(d.heroes) != TYPE_ARRAY or typeof(d.islands) != TYPE_DICTIONARY:
+		return false
+	var v: Dictionary = d.voyage
+	if v.size() != 3 or not v.has("crew") or not v.has("unlocked") or not v.has("done"):
+		return false
+	# single player is always Luffy; in co-op two different characters
+	var heroes: Array = d.heroes
+	if heroes.size() < 1 or heroes.size() > 2:
+		return false
+	var played := []
+	for h in heroes:
+		if typeof(h) != TYPE_DICTIONARY or not _valid_hero(h):
+			return false
+		if played.has(h.character):
+			return false
+		played.append(h.character)
+	if heroes.size() == 1 and played[0] != "luffy":
+		return false
+	return _valid_voyage(d, v, played)
+
+
+func _valid_hero(h: Dictionary) -> bool:
+	var keys := ["character", "level", "xp", "points", "skills", "equipped", "inventory", "health"]
+	for k in keys:
+		if not h.has(k):
+			return false
+	if h.size() != keys.size():
+		return false
+	if typeof(h.character) != TYPE_STRING or not GameSession.CHARACTERS.has(h.character):
+		return false
+	if not _is_number(h.level) or int(h.level) < 1 or int(h.level) > GameState.MAX_LEVEL:
+		return false
+	if not _is_number(h.health) or float(h.health) <= 0.0 or float(h.health) > GameState.max_health(h.character, int(h.level)):
+		return false
+	return _valid_skills(h, h.character) and _valid_inventory(h.inventory)
+
+
+## Level, experience, skill points and skills of a hero (or of a version 3 player).
+func _valid_skills(p: Dictionary, character: String) -> bool:
+	if not _is_number(p.level) or int(p.level) < 1 or int(p.level) > GameState.MAX_LEVEL:
+		return false
+	if not _is_number(p.xp) or int(p.xp) < 0 or int(p.xp) >= GameState.xp_for_level(int(p.level)):
 		return false
 	if not _is_number(p.points) or int(p.points) < 0:
 		return false
-	if not _names_ok(p.skills, GameState.SKILLS.keys()) or typeof(p.equipped) != TYPE_STRING:
+	var all: Dictionary = GameState.SKILLS[character]
+	if not _names_ok(p.skills, all.keys()) or typeof(p.equipped) != TYPE_STRING:
 		return false
 	if p.equipped != "" and not p.skills.has(p.equipped):
 		return false
 	# the points spent plus the ones left can not be more than the levels won
 	var spent := 0
 	for sk in p.skills:
-		spent += int(GameState.SKILLS[sk].cost)
-	if spent + int(p.points) > int(p.level) - 1:
+		spent += int(all[sk].cost)
+	return spent + int(p.points) <= int(p.level) - 1
+
+
+func _valid_inventory(inv: Variant) -> bool:
+	if typeof(inv) != TYPE_ARRAY or inv.size() != GameState.INVENTORY_SIZE:
 		return false
-	if typeof(p.inventory) != TYPE_ARRAY or p.inventory.size() != GameState.INVENTORY_SIZE:
-		return false
-	for e in p.inventory:
+	for e in inv:
 		if typeof(e) != TYPE_ARRAY or e.size() != 2 or typeof(e[0]) != TYPE_STRING or not _is_number(e[1]):
 			return false
 		if e[0] == "":
@@ -364,6 +445,12 @@ func _valid_v3(d: Dictionary, slot: int) -> bool:
 				return false
 		elif not GameState.ITEMS.has(e[0]) or int(e[1]) < 1 or int(e[1]) > int(GameState.ITEMS[e[0]].stack):
 			return false
+	return true
+
+
+## The voyage (crew, islands open and done) and the islands of a document. `played`: characters
+## of the players (they are never part of the recruited crew).
+func _valid_voyage(d: Dictionary, p: Dictionary, played: Array) -> bool:
 	if not _names_ok(p.crew, GameState.CREW) or not _names_ok(p.unlocked, GameState.ISLANDS) or not _names_ok(p.done, GameState.ISLANDS):
 		return false
 	if not p.unlocked.has("isla_inicio") or not p.unlocked.has(d.island):
@@ -387,7 +474,7 @@ func _valid_v3(d: Dictionary, slot: int) -> bool:
 	var recruiter := {"zoro": "isla_inicio", "usopp": "villa_syrup", "nami": "whisky_peak"}
 	for c in p.crew:
 		var isl: Dictionary = d.islands.get(recruiter[c], {})
-		if not bool(isl.get("recruited", false)):
+		if played.has(c) or not bool(isl.get("recruited", false)):
 			return false
 	for id in p.done:
 		var isl2: Dictionary = d.islands.get(id, {})

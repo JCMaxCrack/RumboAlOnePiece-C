@@ -28,16 +28,16 @@ func open(current: String) -> void:
 		var id: String = GameState.ISLANDS[i]
 		var name: String = tr(GameState.ISLAND_NAMES[id])
 		if id == current:
-			b.text = tr("%s  (estás aquí)") % name
+			b.text = tr("%s  (you are here)") % name
 			b.disabled = true
 		elif GameState.unlocked.has(id):
 			b.text = name + ("  ✓" if GameState.completed.has(id) else "")
 			b.disabled = false
 			focus = b
 		else:
-			b.text = "???  " + tr("(completa la isla anterior)")
+			b.text = "???  " + tr("(complete the previous island)")
 			b.disabled = true
-	info_label.text = tr("Elige el rumbo del Going Merry")
+	info_label.text = tr("Choose the Going Merry's course")
 	focus.grab_focus()
 
 

@@ -31,7 +31,8 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if taken or not body is Player or (body as Player).dead:
 		return
-	if not GameState.add_item(item_id):
+	# it goes to the bag of the player who touches it (companions fill player 1's)
+	if not GameState.hero_of(body).add_item(item_id):
 		if _reject_cooldown <= 0.0:
 			_reject_cooldown = 2.0
 			rejected.emit(self)

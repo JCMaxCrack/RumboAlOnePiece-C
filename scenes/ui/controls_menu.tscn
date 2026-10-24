@@ -39,7 +39,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
 theme_override_font_sizes/font_size = 30
-text = "Controles"
+text = "Controls"
 horizontal_alignment = 1
 
 [node name="Scroll" type="ScrollContainer" parent="Panel/VBox"]
@@ -75,7 +75,7 @@ text = "Restablecer"
 [node name="BackButton" type="Button" parent="Panel/VBox/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Volver"
+text = "Back"
 
 [connection signal="pressed" from="Panel/VBox/Buttons/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="Panel/VBox/Buttons/BackButton" to="." method="_on_back_button_pressed"]

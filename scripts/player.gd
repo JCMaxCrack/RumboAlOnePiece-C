@@ -93,6 +93,7 @@ var skill_active := ""
 var _busy_left := 0.0
 var _eat_heal := 0.0
 var _skill_damage := 0.0
+var _skill := {}
 var _skill_cd := {}
 var _eat_sound: AudioStreamPlayer3D
 
@@ -355,65 +356,112 @@ func skill_cooldown(id: String) -> float:
 
 
 func can_use_skill(id: String) -> bool:
-	return GameState.SKILLS.has(id) and skill_cooldown(id) <= 0.0 and not dead and not swimming and not is_attacking() \
+	return not GameState.skill_spec(id).is_empty() and skill_cooldown(id) <= 0.0 and not dead and not swimming and not is_attacking() \
 		and not is_busy() and hurt_timer.is_stopped() and controls_enabled
 
 
-## Gomu Gomu no... (a skill learned in the shop). The animation "skill_<id>" calls _on_skill_hit().
-func use_skill(id: String) -> bool:
+## A skill learned in the shop (GameState.SKILLS; `level`: of the player, it makes it stronger).
+## Its animation "skill_<id>" (Luffy) or else "attack" calls _on_skill_hit().
+func use_skill(id: String, level := 1) -> bool:
 	if not can_use_skill(id):
 		return false
-	var spec: Dictionary = GameState.SKILLS[id]
+	var spec := GameState.skill_spec(id)
 	_skill_cd[id] = float(spec.cooldown)
 	skill_active = id
-	_skill_damage = float(spec.damage) * (1.0 + 0.06 * (GameState.level - 1))
+	_skill = spec
+	_skill_damage = float(spec.damage) * (1.0 + 0.06 * (level - 1))
 	var anim_name := "skill_" + id
-	if not anim.has_animation(anim_library + "/" + anim_name):
+	var own := anim.has_animation(anim_library + "/" + anim_name)
+	if not own:
 		anim_name = "attack"
 	_play(anim_name, 1.0, 0.0, true)
 	_busy_left = anim.get_animation(anim_library + "/" + anim_name).length
 	swing_sound.play()
-	if id == "fusen":
-		invulnerability_timer.start(_busy_left + 0.4)
-		var tw := create_tween()
-		var base := model.scale
-		tw.tween_property(model, "scale", Vector3(base.x * 1.7, base.y * 1.15, base.z * 1.7), 0.25).set_trans(Tween.TRANS_BACK)
-		tw.tween_interval(maxf(0.1, _busy_left - 0.5))
-		tw.tween_property(model, "scale", base, 0.25)
-	elif id == "muchi" or id == "storm":
-		var spin := create_tween()
-		spin.tween_property(model, "rotation:y", model.rotation.y + TAU * (1.0 if id == "muchi" else 3.0), _busy_left * 0.8)
+	match str(spec.effect):
+		"shield":
+			invulnerability_timer.start(_busy_left + 0.6)
+			var tw := create_tween()
+			var base := model.scale
+			if id == "fusen":
+				tw.tween_property(model, "scale", Vector3(base.x * 1.7, base.y * 1.15, base.z * 1.7), 0.25).set_trans(Tween.TRANS_BACK)
+				tw.tween_interval(maxf(0.1, _busy_left - 0.5))
+				tw.tween_property(model, "scale", base, 0.25)
+			else:
+				FX.burst(get_parent(), global_position + Vector3(0, 1.0, 0), _skill_color(), 40, 2.5, 0.25, 0.5, 1.2)
+		"spin", "storm":
+			var turns := 1.0 if spec.effect == "spin" else 3.0
+			var spin := create_tween()
+			spin.tween_property(model, "rotation:y", model.rotation.y + TAU * turns, _busy_left * 0.8)
+	if not own and (spec.effect == "rapid" or spec.effect == "storm"):
+		# without its own animation the extra hits come one after the other
+		_busy_left = maxf(_busy_left, 1.1)
+		var hits := create_tween()
+		for i in 5:
+			hits.tween_interval(0.18)
+			hits.tween_callback(_on_skill_hit)
 	return true
+
+
+func _skill_color() -> Color:
+	match anim_library:
+		"zoro": return Color(0.8, 0.95, 1.0, 0.8)
+		"usopp": return Color(1.0, 0.65, 0.3, 0.8)
+		"nami": return Color(0.55, 0.75, 1.0, 0.85)
+	return Color(1, 0.8, 0.5, 0.8)
 
 
 ## Hit of the skill being done (the animations call it once or several times).
 func _on_skill_hit() -> void:
+	if skill_active == "" or _skill.is_empty():
+		return
 	var dmg := _skill_damage
+	var r := float(_skill.radius)
+	var push := float(_skill.push)
+	var col := _skill_color()
 	var front := global_position + facing * 1.6
-	match skill_active:
-		"muchi":
-			_area_hit(global_position, 3.3, dmg, 8.0)
-			FX.ring(get_parent(), global_position, 3.3, Color(1, 0.8, 0.5, 0.8))
-		"bazooka":
-			_area_hit(front, 1.9, dmg, 18.0)
-			FX.burst(get_parent(), front + Vector3(0, 1.1, 0), Color(1, 0.9, 0.6), 24, 5.0, 0.12, 0.0, 0.4)
+	match str(_skill.effect):
+		"spin":
+			_area_hit(global_position, r, dmg, push)
+			FX.ring(get_parent(), global_position, r, col)
+		"front":
+			_area_hit(front, r, dmg, push)
+			FX.burst(get_parent(), front + Vector3(0, 1.1, 0), col, 24, 5.0, 0.12, 0.0, 0.4)
 			_shake = 0.2
-		"gatling":
-			_area_hit(front, 1.5, dmg, 2.5)
-			FX.burst(get_parent(), front + Vector3(randf_range(-0.4, 0.4), 1.1 + randf_range(-0.3, 0.3), 0), Color(1, 0.95, 0.8), 6, 3.0, 0.07, 0.0, 0.25)
-		"fusen":
-			_area_hit(global_position, 3.6, dmg, 13.0)
-			FX.ring(get_parent(), global_position, 3.6, Color(1, 0.6, 0.6, 0.8))
-		"ono":
+		"rapid":
+			_area_hit(front, r, dmg, push)
+			FX.burst(get_parent(), front + Vector3(randf_range(-0.4, 0.4), 1.1 + randf_range(-0.3, 0.3), 0), col, 6, 3.0, 0.07, 0.0, 0.25)
+		"shield":
+			_area_hit(global_position, r, dmg, push)
+			FX.ring(get_parent(), global_position, r, col)
+		"wave":
 			var p := global_position + facing * 2.2
-			_area_hit(p, 2.8, dmg, 10.0)
-			FX.ring(get_parent(), p, 3.2, Color(1, 0.75, 0.3, 0.9))
+			_area_hit(p, r, dmg, push)
+			FX.ring(get_parent(), p, r + 0.4, col)
 			FX.burst(get_parent(), p, Color(0.7, 0.6, 0.45), 30, 5.0, 0.14, -12.0, 0.8)
 			_shake = 0.3
 		"storm":
-			_area_hit(global_position, 4.2, dmg, 6.0)
-			FX.ring(get_parent(), global_position, 4.2, Color(0.9, 0.9, 1.0, 0.7))
+			_area_hit(global_position, r, dmg, push)
+			FX.ring(get_parent(), global_position, r, col)
+		"shot":
+			_fire(facing, dmg, r, col)
+		"spread":
+			for a in [-0.3, 0.0, 0.3]:
+				_fire(facing.rotated(Vector3.UP, a), dmg, r, col)
 	punch_sound.play()
+
+
+## A projectile of a skill (Zoro's flying cut, Usopp's stars, Nami's balls).
+func _fire(dir: Vector3, damage: float, radius: float, color: Color) -> void:
+	var pellet := Pellet.new()
+	var muzzle := global_position + Vector3(0, 1.2, 0) + dir * 0.7
+	pellet.direction = _aim_from(muzzle) if dir == facing else dir
+	pellet.damage = damage
+	pellet.radius = radius
+	pellet.color = color
+	pellet.speed = 22.0
+	pellet.shooter = self
+	get_parent().add_child(pellet)
+	pellet.global_position = muzzle
 
 
 ## Hits every enemy inside a sphere (only those in front of him if cone_dot > -1).
@@ -449,6 +497,7 @@ func _end_busy() -> void:
 	_busy_left = 0.0
 	eating = false
 	skill_active = ""
+	_skill = {}
 	_show_food("")
 	_current_anim = ""
 
@@ -456,12 +505,34 @@ func _end_busy() -> void:
 # ------------------------------------------------------------------ Usopp's slingshot
 func _shoot() -> void:
 	var pellet := Pellet.new()
-	pellet.direction = facing
+	var muzzle := global_position + Vector3(0, 1.3, 0) + facing * 0.6
+	pellet.direction = _aim_from(muzzle)
 	pellet.damage = punch_damage
 	pellet.shooter = self
 	get_parent().add_child(pellet)
-	pellet.global_position = global_position + Vector3(0, 1.3, 0) + facing * 0.6
+	pellet.global_position = muzzle
 	punch_sound.play()
+
+
+## Usopp's aim: the closest enemy in front of him (also small ones, like the mushrooms), at the
+## height of its body; straight ahead if there is none.
+func _aim_from(muzzle: Vector3) -> Vector3:
+	var best: Node3D = null
+	var best_d := 22.0
+	for e in get_tree().get_nodes_in_group("enemies"):
+		var n := e as Node3D
+		if n == null or (n.has_method("is_defeated") and n.is_defeated()):
+			continue
+		var to := n.global_position - global_position
+		to.y = 0.0
+		var d := to.length()
+		if d < best_d and d > 0.1 and to.normalized().dot(facing) > 0.8:
+			best = n
+			best_d = d
+	if best == null:
+		return facing
+	var height := 1.0 if best.is_in_group("bosses") else 0.55
+	return (best.global_position + Vector3(0, height, 0) - muzzle).normalized()
 
 
 ## Called by Buggy and the mini enemies when their attack connects.

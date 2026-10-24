@@ -1,7 +1,7 @@
 class_name PauseMenu
 extends CanvasLayer
 ## Pause menu. Nodes in scenes/ui/pause_menu.tscn.
-## "Guardar partida" opens SaveSlots (save mode): the game is saved in a new slot or replaces one.
+## "Save game" opens SaveSlots (save mode): the game is saved in a new slot or replaces one.
 
 ## Connected by world.gd (scenes/world.tscn), which collects the progress and saves it.
 signal save_requested(slot: int)

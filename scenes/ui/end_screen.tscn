@@ -35,7 +35,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
-text = "¡Lo lograste!"
+text = "You did it!"
 horizontal_alignment = 1
 
 [node name="Detail" type="Label" parent="Panel/VBox" unique_id=1097192783]
@@ -49,17 +49,17 @@ autowrap_mode = 3
 visible = false
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Volver al punto de control"
+text = "Back to the checkpoint"
 
 [node name="RetryButton" type="Button" parent="Panel/VBox" unique_id=2104482167]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Jugar de nuevo"
+text = "Play again"
 
 [node name="MenuButton" type="Button" parent="Panel/VBox" unique_id=977666539]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Menú principal"
+text = "Main menu"
 
 [connection signal="pressed" from="Panel/VBox/CheckpointButton" to="." method="_on_checkpoint_button_pressed"]
 [connection signal="pressed" from="Panel/VBox/RetryButton" to="." method="_on_retry_button_pressed"]

@@ -33,9 +33,9 @@ func arrival_message(loaded: bool) -> void:
 	if loaded:
 		super(loaded)
 	elif mission == Mission.NOT_GIVEN:
-		hud.show_banner(tr("Villa Syrup"), tr("Koby te espera en el puerto"), 3.0)
+		hud.show_banner(tr("Syrup Village"), tr("Koby is waiting for you at the port"), 3.0)
 	else:
-		hud.show_message(tr("Villa Syrup"), 2.0)
+		hud.show_message(tr("Syrup Village"), 2.0)
 
 
 func gate_open() -> bool:
@@ -45,9 +45,9 @@ func gate_open() -> bool:
 func _interactables() -> Array:
 	var out := super()
 	if _usopp_here():
-		out.append([usopp, 3.4, "Hablar", _talk_to_usopp])
+		out.append([usopp, 3.4, "Talk", _talk_to_usopp])
 	if not gate_open():
-		out.append([gate, 4.5, "Abrir la reja", _try_gate])
+		out.append([gate, 4.5, "Open the gate", _try_gate])
 	return out
 
 
@@ -67,52 +67,51 @@ func _talk_to_koby() -> void:
 	match mission:
 		Mission.NOT_GIVEN:
 			open_dialog("Koby", [
-				"¡Luffy-san! Llegué antes que tú en un barco de la Marina. Escucha, esta aldea está en peligro.",
-				"Un chico de aquí, Usopp, dice que Klahadore, el mayordomo de la mansión del norte, es en realidad el Capitán Kuro.",
-				"Nadie le cree porque siempre dice mentiras... pero yo creo que esta vez dice la verdad.",
-				"La reja de la mansión está cerrada con llave. La llave está en la cripta del viejo cementerio del este, lleno de esqueletos.",
-				"Tu misión: consigue la llave, entra en la mansión y derrota a Kuro. Dicen que recorre sus pasillos sin hacer ruido.",
-				"Usopp vive en la colina del oeste, sobre la aldea. ¡Seguro que querrá ir contigo cuando Kuro caiga!",
+				"Luffy-san! I got here before you on a Marine ship. Listen, this village is in danger.",
+				"A boy from here, Usopp, says that Klahadore, the butler of the north mansion, is really Captain Kuro.",
+				"Nobody believes him because he always tells lies... but I think this time he's telling the truth.",
+				"The mansion gate is locked. The key is in the crypt of the old east graveyard, full of skeletons.",
+				"Your mission: get the key, go into the mansion and defeat Kuro. They say he walks its halls without a sound.",
+				"Usopp lives on the west hill, above the village. He'll surely want to go with you once Kuro falls!",
 			], give_mission)
 		Mission.ACTIVE:
 			open_dialog("Koby", [_progress_line()])
 		_:
-			open_dialog("Koby", ["¡La aldea está a salvo gracias a ti, Luffy-san!", "La siguiente isla es Whisky Peak. Toma el timón del Going Merry: ¡te veré allí!"])
+			open_dialog("Koby", ["The village is safe thanks to you, Luffy-san!", "The next island is Whisky Peak. Take the Going Merry's helm: I'll see you there!"])
 
 
 func _talk_to_usopp() -> void:
 	if mission == Mission.NOT_GIVEN:
 		open_dialog("Usopp", [
-			"¡Alto ahí! ¡Soy el gran capitán Usopp, con 8000 hombres a mis órdenes!",
-			"...Bueno, no. Pero tienes que creerme: ¡el mayordomo de la mansión es el Capitán Kuro! Habla con ese chico de la Marina del puerto.",
+			"Stop right there! I'm the great Captain Usopp, with 8000 men under my command!",
+			"...Well, no. But you have to believe me: the mansion's butler is Captain Kuro! Talk to that Marine boy at the port.",
 		])
 	elif boss.is_defeated():
 		open_dialog("Usopp", [
-			"¡Lo lograste! ¡Kuro está derrotado y la aldea está a salvo!",
-			"Siempre quise ser un valiente guerrero del mar... ¡Capitán Luffy, el gran Usopp se une a tu tripulación!",
+			"You did it! Kuro is defeated and the village is safe!",
+			"I always wanted to be a brave warrior of the sea... Captain Luffy, the great Usopp joins your crew!",
 		], recruit)
 	else:
-		open_dialog("Usopp", ["¡Kuro sigue en la mansión! Yo... yo vigilo la aldea desde aquí. ¡Ten cuidado!"])
+		open_dialog("Usopp", ["Kuro is still in the mansion! I... I'll guard the village from here. Be careful!"])
 
 
 func _progress_line() -> String:
 	if not collected_items.has("KeyChest"):
-		return tr("La llave está en la cripta del viejo cementerio del este. ¡Cuidado con los esqueletos!")
+		return tr("The key is in the crypt of the old east graveyard. Watch out for the skeletons!")
 	if not gate_open():
-		return tr("¡Tienes la llave! Úsala en la reja de la mansión, en la meseta del norte.")
+		return tr("You have the key! Use it on the mansion gate, on the north plateau.")
 	if not boss.is_defeated():
-		return tr("Kuro está dentro de la mansión. Recorre los salones y los pasillos... ¡ten cuidado!")
-	return tr("¡Kuro cayó! Usopp te espera en la colina del oeste.")
+		return tr("Kuro is inside the mansion. Search the halls and corridors... be careful!")
+	return tr("Kuro has fallen! Usopp is waiting for you on the west hill.")
 
 
 func _try_gate() -> void:
-	if GameState.count_of("key") <= 0:
-		open_dialog(tr("Reja de la mansión"), ["La reja está cerrada con llave."])
+	if not GameState.party_take("key", 1):
+		open_dialog(tr("Mansion gate"), ["The gate is locked."])
 		return
-	GameState.remove_item("key")
 	flags.append("gate_open")
 	_set_gate_open(true)
-	hud.show_message(tr("¡La reja de la mansión está abierta!"), 2.0)
+	hud.show_message(tr("The mansion gate is open!"), 2.0)
 	_update_mission_text()
 	if SaveManager.current_slot > 0:
 		save_game(SaveManager.current_slot)
@@ -136,15 +135,17 @@ func _set_gate_open(animate: bool) -> void:
 
 func _mission_text() -> String:
 	if mission == Mission.NOT_GIVEN:
-		return tr("Habla con Koby en el puerto")
+		return tr("Talk to Koby at the port")
 	if mission == Mission.DONE:
-		return tr("¡Isla completada!") + "\n" + tr("Toma el timón del Going Merry y navega hasta Whisky Peak")
+		return tr("Island complete!") + "\n" + tr("Take the Going Merry's helm and sail to Whisky Peak")
 	var m := func(done: bool) -> String: return "[X]" if done else "[  ]"
-	return "%s %s\n%s %s\n%s %s\n%s %s" % [
-		m.call(collected_items.has("KeyChest")), tr("Encuentra la llave en el cementerio"),
-		m.call(gate_open()), tr("Abre la reja de la mansión"),
-		m.call(boss.is_defeated()), tr("Derrota al Capitán Kuro en la mansión"),
-		m.call(recruited), tr("Recluta a Usopp en la colina")]
+	var text := "%s %s\n%s %s\n%s %s" % [
+		m.call(collected_items.has("KeyChest")), tr("Find the key in the graveyard"),
+		m.call(gate_open()), tr("Open the mansion gate"),
+		m.call(boss.is_defeated()), tr("Defeat Captain Kuro in the mansion")]
+	if not GameSession.is_played("usopp"):
+		text += "\n%s %s" % [m.call(recruited), tr("Recruit Usopp on the hill")]
+	return text
 
 
 func _mission_goals_done() -> bool:
@@ -153,8 +154,8 @@ func _mission_goals_done() -> bool:
 
 func _on_item_taken(item: Collectible) -> void:
 	if item.item_id == "key":
-		hud.show_message(tr("¡La llave de la mansión! Úsala en la reja de la meseta del norte"), 2.5)
+		hud.show_message(tr("The mansion key! Use it on the gate on the north plateau"), 2.5)
 
 
 func _on_boss_down() -> void:
-	hud.show_message(tr("¡Derrotaste al Capitán Kuro! Ve a buscar a Usopp a la colina"), 2.5)
+	hud.show_message(tr("You defeated Captain Kuro! Go find Usopp on the hill"), 2.5)

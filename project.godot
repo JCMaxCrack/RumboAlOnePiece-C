@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Rumbo al One Piece - Beta"
+config/name="Finding the One Piece - Beta"
 config/description="Beta: big island, Koby's mission (defeat Buggy and collect the meat), swimming, the Going Merry and touch controls for phones."
 config/version="0.3.0-beta"
 run/main_scene="res://scenes/main_menu.tscn"
@@ -184,3 +184,8 @@ limits/opengl/max_lights_per_object=4
 anti_aliasing/quality/screen_space_aa=1
 occlusion_culling/use_occlusion_culling=true
 mesh_lod/lod_change/threshold_pixels=2.0
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/i18n/translations.en.translation", "res://assets/i18n/translations.es.translation")
+locale/fallback="en"

@@ -8,7 +8,10 @@ extends Node3D
 ## While sailing, the crew stays on the deck (their physics is paused and they move with the ship),
 ## the hull rocks with the waves (the same waves as the water shader) and leaves a wake of foam.
 ## The World decides where it can go (land, the border of the sea, islands not open yet) through
-## the callable `can_sail`, and docks it in the ports.
+## the callable `can_sail`, and docks it in the ports: the ship moors alongside the pier and its
+## gangway (hinged on the bulwark of the main deck, where its side walls leave a gap) goes down
+## onto the pier; it is raised again when the ship leaves. A small ramp inside the bulwark goes
+## down to the main deck.
 
 signal helm_taken
 signal helm_left
@@ -22,6 +25,9 @@ const DECK_SPOTS := [Vector3(-1.4, 1.0, 1.2), Vector3(1.4, 1.0, 1.8), Vector3(0.
 ## Height of the ship's origin over the sea.
 const FLOAT_Y := 1.0
 ## Points of the hull that must stay in deep water (ship coordinates, x and z).
+## Hinge of the gangway on the bulwark of the main deck (x is set by the side of the pier).
+const GANGWAY_HINGE := Vector3(2.95, 1.1, 0.95)
+const GANGWAY_LENGTH := 4.6
 const HULL_PROBES := [Vector2(0, 9.0), Vector2(-2.6, 4.0), Vector2(2.6, 4.0), Vector2(-2.6, -6.0), Vector2(2.6, -6.0), Vector2(0, -8.5)]
 
 @export var max_speed := 15.0
@@ -54,6 +60,9 @@ var _spray: CPUParticles3D
 var _docking: Tween
 var _blocked_wait := 0.0
 var _settle := 0.0
+var _gangway: Node3D
+var _gangway_tween: Tween
+var gangway_down := false
 
 
 func _ready() -> void:
@@ -67,6 +76,7 @@ func _ready() -> void:
 	helm.position = HELM
 	_build_camera()
 	_build_wake()
+	_build_gangway()
 
 
 # ------------------------------------------------------------------ helm
@@ -270,6 +280,129 @@ func _place_passengers() -> void:
 		if pl == driver:
 			pl.facing = forward()
 			pl.model.rotation.y = atan2(pl.facing.x, pl.facing.z) + pl.model_yaw
+
+
+# ------------------------------------------------------------------ gangway
+func _build_gangway() -> void:
+	var wood := StandardMaterial3D.new()
+	wood.albedo_color = Color(0.5, 0.34, 0.2)
+	wood.roughness = 0.85
+	var dark := StandardMaterial3D.new()
+	dark.albedo_color = Color(0.3, 0.2, 0.12)
+	_gangway = Node3D.new()
+	_gangway.name = "Gangway"
+	add_child(_gangway)
+	_gangway.position = GANGWAY_HINGE
+	var body := StaticBody3D.new()
+	body.collision_mask = 0
+	_gangway.add_child(body)
+	var plank := BoxMesh.new()
+	plank.size = Vector3(GANGWAY_LENGTH, 0.16, 1.25)
+	plank.material = wood
+	var mi := MeshInstance3D.new()
+	mi.mesh = plank
+	mi.position = Vector3(GANGWAY_LENGTH / 2.0, -0.08, 0)
+	body.add_child(mi)
+	var cs := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = plank.size
+	cs.shape = box
+	cs.position = mi.position
+	body.add_child(cs)
+	for z in [-0.6, 0.6]:
+		var rail := BoxMesh.new()
+		rail.size = Vector3(GANGWAY_LENGTH, 0.07, 0.07)
+		rail.material = dark
+		var r := MeshInstance3D.new()
+		r.mesh = rail
+		r.position = Vector3(GANGWAY_LENGTH / 2.0, 0.55, z)
+		body.add_child(r)
+		for k in 4:
+			var post := BoxMesh.new()
+			post.size = Vector3(0.06, 0.6, 0.06)
+			post.material = dark
+			var pm := MeshInstance3D.new()
+			pm.mesh = post
+			pm.position = Vector3(0.3 + k * (GANGWAY_LENGTH - 0.6) / 3.0, 0.25, z)
+			body.add_child(pm)
+	for k in 6:
+		var slat := BoxMesh.new()
+		slat.size = Vector3(0.08, 0.05, 1.25)
+		slat.material = dark
+		var sm := MeshInstance3D.new()
+		sm.mesh = slat
+		sm.position = Vector3(0.4 + k * (GANGWAY_LENGTH - 0.8) / 5.0, 0.02, 0)
+		body.add_child(sm)
+	_show_gangway(false)
+	_gangway.position.y = GANGWAY_HINGE.y - GANGWAY_LENGTH * 0.95
+	_gangway.rotation.z = PI / 2.0
+	# ramps from the top of the bulwark down to the main deck, on both sides
+	var inner := StaticBody3D.new()
+	inner.name = "BoardingRamps"
+	inner.collision_mask = 0
+	add_child(inner)
+	for side in [-1.0, 1.0]:
+		var run := 1.9
+		var rise := GANGWAY_HINGE.y
+		var ang := atan2(rise, run)
+		var length := sqrt(run * run + rise * rise)
+		var ramp := BoxMesh.new()
+		ramp.size = Vector3(length, 0.14, 1.2)
+		ramp.material = wood
+		var rm := MeshInstance3D.new()
+		rm.mesh = ramp
+		var center := Vector3(side * (GANGWAY_HINGE.x - 0.1 - run / 2.0), rise / 2.0 - 0.07, GANGWAY_HINGE.z)
+		rm.transform = Transform3D(Basis(Vector3.BACK, side * ang), center)
+		inner.add_child(rm)
+		var rc := CollisionShape3D.new()
+		var rb := BoxShape3D.new()
+		rb.size = ramp.size
+		rc.shape = rb
+		rc.transform = rm.transform
+		inner.add_child(rc)
+
+
+## The gangway lies on the pier (side: where the pier is, drop: from the hinge to the pier) or is
+## raised against the hull. animate = false puts it there at once.
+func set_gangway(down: bool, side: float, drop: float, animate := true) -> void:
+	gangway_down = down
+	if _gangway_tween:
+		_gangway_tween.kill()
+	# stowed, the plank stands up against the bulwark and slides down into the hull out of sight;
+	# deployed, it comes up again and swings down onto the pier (the hinge turned to the pier side)
+	var lowered := -asin(clampf(drop / GANGWAY_LENGTH, 0.0, 0.9))
+	var hidden_y := GANGWAY_HINGE.y - GANGWAY_LENGTH * 0.95
+	if not animate:
+		if down:
+			_place_gangway(side)
+		_gangway.position.y = GANGWAY_HINGE.y if down else hidden_y
+		_gangway.rotation.z = lowered if down else PI / 2.0
+		_show_gangway(down)
+		return
+	_gangway_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	if down:
+		if not _gangway.visible:
+			_place_gangway(side)
+			_gangway.rotation.z = PI / 2.0
+			_gangway.position.y = hidden_y
+			_show_gangway(true)
+		_gangway_tween.tween_property(_gangway, "position:y", GANGWAY_HINGE.y, 0.8)
+		_gangway_tween.tween_property(_gangway, "rotation:z", lowered, 1.2)
+	else:
+		_gangway_tween.tween_property(_gangway, "rotation:z", PI / 2.0, 1.0)
+		_gangway_tween.tween_property(_gangway, "position:y", hidden_y, 0.8)
+		_gangway_tween.tween_callback(_show_gangway.bind(false))
+
+
+func _place_gangway(side: float) -> void:
+	_gangway.position = Vector3(side * GANGWAY_HINGE.x, GANGWAY_HINGE.y, GANGWAY_HINGE.z)
+	_gangway.rotation.y = 0.0 if side > 0.0 else PI
+
+
+func _show_gangway(on: bool) -> void:
+	_gangway.visible = on
+	for body in _gangway.find_children("*", "CollisionObject3D", true, false):
+		(body as CollisionObject3D).process_mode = Node.PROCESS_MODE_INHERIT if on else Node.PROCESS_MODE_DISABLED
 
 
 # ------------------------------------------------------------------ camera and wake

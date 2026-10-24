@@ -22,7 +22,7 @@ func _ready() -> void:
 func open() -> void:
 	visible = true
 	_waiting_action = ""
-	wait_label.text = tr("Elige una acción para cambiar su tecla o su botón")
+	wait_label.text = tr("Choose an action to change its key or button")
 	_refresh()
 	back_button.grab_focus()
 
@@ -37,7 +37,7 @@ func _refresh() -> void:
 	for c in list.get_children():
 		list.remove_child(c)
 		c.queue_free()
-	for title in ["Acción", "Teclado", "Mando"]:
+	for title in ["Action", "Keyboard", "Gamepad"]:
 		var h := Label.new()
 		h.text = tr(title)
 		h.modulate = Color(0.93, 0.78, 0.42)
@@ -61,7 +61,7 @@ func _refresh() -> void:
 func _on_binding_pressed(action: String, gamepad: bool) -> void:
 	_waiting_action = action
 	_waiting_gamepad = gamepad
-	wait_label.text = (tr("Pulsa el botón del mando para «%s» (Esc cancela)") if gamepad else tr("Pulsa la tecla para «%s» (Esc cancela)")) % tr(_label_of(action))
+	wait_label.text = (tr("Press the gamepad button for “%s” (Esc cancels)") if gamepad else tr("Press the key for “%s” (Esc cancels)")) % tr(_label_of(action))
 	_refresh()
 
 
@@ -78,7 +78,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).pressed and (event as InputEventKey).physical_keycode == KEY_ESCAPE:
 		get_viewport().set_input_as_handled()
 		_waiting_action = ""
-		wait_label.text = tr("Cancelado")
+		wait_label.text = tr("Cancelled")
 		_refresh()
 		return
 	var wants_pad := _waiting_gamepad
@@ -93,13 +93,13 @@ func _input(event: InputEvent) -> void:
 	var action := _waiting_action
 	_waiting_action = ""
 	Preferences.set_event(action, e)
-	wait_label.text = tr("«%s» ahora es %s") % [tr(_label_of(action)), Preferences.describe(e)]
+	wait_label.text = tr("“%s” is now %s") % [tr(_label_of(action)), Preferences.describe(e)]
 	_refresh()
 
 
 func _on_reset_button_pressed() -> void:
 	Preferences.reset_bindings()
-	wait_label.text = tr("Controles restablecidos")
+	wait_label.text = tr("Controls reset")
 
 
 func _on_back_button_pressed() -> void:

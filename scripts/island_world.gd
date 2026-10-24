@@ -59,16 +59,19 @@ func _ready() -> void:
 	var st: Dictionary = GameState.islands.get(island_id, {})
 	if not st.is_empty():
 		_apply_island(st)
+	# a crew member that a player plays is with the crew from the start: nobody recruits him
+	if GameSession.is_played(recruit_member):
+		recruited = true
 	# the crew member of the island travels with Luffy once he joins: this copy is not needed
 	var npc := recruit_node()
-	if npc and (GameState.has_crew(recruit_member) or (recruit_member == "zoro" and GameState.coop_zoro())):
+	if npc and (GameState.has_crew(recruit_member) or GameSession.is_played(recruit_member)):
 		remove_child(npc)
 		npc.queue_free()
 	_connect_nodes()
 	_refresh_checkpoints()
 	if koby:
 		koby.set_mission_given(mission >= Mission.ACTIVE)
-		koby.set_prompt(tr("Toca «Hablar»") if world.touch_controls.active else "[%s] %s" % [Preferences.event_text("interact", false), tr("Hablar")])
+		koby.set_prompt(tr("Tap “Talk”") if world.touch_controls.active else "[%s] %s" % [Preferences.event_text("interact", false), tr("Talk")])
 	if chunks:
 		chunks.target = player
 		chunks.load_around(player.global_position)
@@ -97,7 +100,7 @@ func _island_ready() -> void:
 func _interactables() -> Array:
 	var out := []
 	if koby and koby.player_near:
-		out.append([koby, 99.0, "Hablar", _talk_to_koby])
+		out.append([koby, 99.0, "Talk", _talk_to_koby])
 	return out
 
 
@@ -129,9 +132,9 @@ func _apply_island_extra(_st: Dictionary) -> void:
 ## island: message when Luffy arrives (loaded: a saved game was just loaded).
 func arrival_message(loaded: bool) -> void:
 	if loaded:
-		hud.show_message(tr("Partida %d cargada") % SaveManager.current_slot, 2.0)
+		hud.show_message(tr("Game %d loaded") % SaveManager.current_slot, 2.0)
 	else:
-		hud.show_banner(tr(GameState.ISLAND_NAMES[island_id]), tr("Habla con Koby para recibir tu misión") if mission == Mission.NOT_GIVEN else "", 3.0)
+		hud.show_banner(tr(GameState.ISLAND_NAMES[island_id]), tr("Talk to Koby to get your mission") if mission == Mission.NOT_GIVEN else "", 3.0)
 
 
 ## island: something was picked up.
@@ -170,7 +173,7 @@ func give_mission() -> void:
 	mission = Mission.ACTIVE
 	if koby:
 		koby.set_mission_given(true)
-	hud.show_message(tr("¡Nueva misión!"), 1.5)
+	hud.show_message(tr("New mission!"), 1.5)
 	_update_mission_text()
 	_update_boss_hud()
 	check_mission()
@@ -182,11 +185,11 @@ func recruit() -> void:
 		return
 	recruited = true
 	GameState.add_crew(recruit_member)
-	GameState.add_xp(30)
+	world.give_xp(30)
 	var npc := recruit_node()
 	if npc:
 		world.adopt_crew(recruit_member, npc)
-	hud.show_message(tr("¡%s se unió a la tripulación!") % tr(recruit_member.capitalize()), 2.0)
+	hud.show_message(tr("%s joined the crew!") % tr(recruit_member.capitalize()), 2.0)
 	_update_mission_text()
 	check_mission()
 
@@ -196,7 +199,7 @@ func check_mission() -> void:
 	if mission == Mission.ACTIVE and _mission_goals_done():
 		mission = Mission.DONE
 		GameState.complete_island(island_id)
-		GameState.add_xp(50)
+		world.give_xp(50)
 		_update_mission_text()
 		world.on_island_completed(self)
 
@@ -224,7 +227,7 @@ func _connect_nodes() -> void:
 			continue
 		if not item.collected.is_connected(_on_item_collected):
 			item.collected.connect(_on_item_collected)
-		item.rejected.connect(func(_i): hud.show_message(tr("¡Inventario lleno! Come algo para hacer sitio (Q)"), 1.6))
+		item.rejected.connect(func(_i): hud.show_message(tr("Inventory full! Eat something to make room (Q)"), 1.6))
 	for cp in checkpoints.get_children():
 		var c2 := cp as Checkpoint
 		if not c2.reached.is_connected(_on_checkpoint_reached):
@@ -242,12 +245,12 @@ func _on_boss_state_changed(_new_state: int) -> void:
 	if boss.call("is_defeated"):
 		return
 	var text: String = boss.call("state_text")
-	var chasing := ["¡Persiguiendo!", "¡Te vio!", "¡Atacando!", "¡Ataque especial!"].has(text)
+	var chasing := ["Chasing!", "He saw you!", "Attacking!", "Special attack!"].has(text)
 	if chasing and not world.chase_music.playing:
-		hud.show_message(tr("¡%s te vio!") % tr(boss.get("display_name")), 1.0)
+		hud.show_message(tr("%s saw you!") % tr(boss.get("display_name")), 1.0)
 		world.set_chase(true)
-	elif not chasing and world.chase_music.playing and text == "Regresando":
-		hud.show_message(tr("¡Escapaste!"), 1.0)
+	elif not chasing and world.chase_music.playing and text == "Returning":
+		hud.show_message(tr("You got away!"), 1.0)
 		world.set_chase(false)
 	_update_boss_hud()
 
@@ -257,7 +260,7 @@ func _on_boss_defeated() -> void:
 		return
 	world.set_chase(false)
 	world.award_xp(boss)
-	hud.show_message(tr("¡Derrotaste a %s!") % tr(boss.get("display_name")), 2.0)
+	hud.show_message(tr("You defeated %s!") % tr(boss.get("display_name")), 2.0)
 	get_tree().create_timer(1.5).timeout.connect(_update_boss_hud)
 	_update_mission_text()
 	_on_boss_down()
@@ -271,7 +274,7 @@ func _update_boss_hud() -> void:
 	if boss == null:
 		hud.set_boss_visible(false)
 		return
-	var fighting: bool = boss.has_method("state_text") and ["¡Persiguiendo!", "¡Te vio!", "¡Atacando!", "¡Ataque especial!"].has(boss.call("state_text"))
+	var fighting: bool = boss.has_method("state_text") and ["Chasing!", "He saw you!", "Attacking!", "Special attack!"].has(boss.call("state_text"))
 	hud.set_boss_visible((mission == Mission.ACTIVE or fighting) and not boss.call("is_defeated"))
 
 
@@ -282,7 +285,7 @@ func _on_item_collected(item: Collectible) -> void:
 	collected_items.append(str(item.name))
 	hud.set_count(_meat_taken(), _meat_total())
 	_update_mission_text()
-	hud.show_message(tr("¡%s! Guardada en el inventario (Q para comer)") % GameState.item_name(item.item_id) if GameState.ITEMS[item.item_id].heal > 0.0 else tr("¡%s!") % GameState.item_name(item.item_id), 1.4)
+	hud.show_message(tr("%s! Stored in the inventory (Q to eat)") % GameState.item_name(item.item_id) if GameState.ITEMS[item.item_id].heal > 0.0 else tr("%s!") % GameState.item_name(item.item_id), 1.4)
 	_on_item_taken(item)
 	check_mission()
 
@@ -317,7 +320,7 @@ func _on_checkpoint_reached(cp: Checkpoint) -> void:
 	cp.play_activate_sound()
 	_refresh_checkpoints()
 	var saved := SaveManager.current_slot > 0 and save_game(SaveManager.current_slot)
-	hud.show_message(tr("Punto de control: %s") % tr(cp.display_name) + ("  ·  " + tr("Partida guardada") if saved else ""), 2.0)
+	hud.show_message(tr("Checkpoint: %s") % tr(cp.display_name) + ("  ·  " + tr("Game saved") if saved else ""), 2.0)
 
 
 func _refresh_checkpoints() -> void:

@@ -18,7 +18,7 @@ signal defeated(enemy: MiniEnemy)
 
 enum State { WANDER, CHASE, ATTACK, HURT, DEAD }
 
-@export var display_name := "Enemigo"
+@export var display_name := "Enemy"
 @export var anim_library := "mushroom"
 @export var max_health := 45.0
 @export var damage := 12.0

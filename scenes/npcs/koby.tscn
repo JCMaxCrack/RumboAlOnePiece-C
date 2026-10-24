@@ -14,7 +14,7 @@ radius = 3.2
 [node name="Koby" type="StaticBody3D" unique_id=659906218]
 collision_mask = 0
 script = ExtResource("1_8n8yv")
-mission_lines = PackedStringArray("¡Luffy-san! ¡Qué bueno que llegaste a la isla!", "Buggy el Payaso se escondió en el cráter del volcán, en el centro de la isla, y tiene a todos aterrorizados.", "Tu misión: ¡derrota a Buggy y recolecta toda la carne que está repartida por la isla!", "Cada carne te devuelve vida. Y el Going Merry está anclado en la ensenada del noreste: sube por el puente del muelle.")
+mission_lines = PackedStringArray("Luffy-san! I'm so glad you made it to the island!", "Buggy the Clown is hiding in the volcano crater, in the middle of the island, and he has everyone terrified.", "Your mission: defeat Buggy and collect all the meat scattered around the island!", "Every piece of meat gives you health back. And the Going Merry is anchored in the northeast inlet: go up the gangway from the dock.")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1958805768]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -51,7 +51,7 @@ visible = false
 pixel_size = 0.006
 billboard = 1
 modulate = Color(0.93, 0.78, 0.42, 1)
-text = "[E] Hablar"
+text = "[E] Talk"
 font_size = 40
 
 [node name="MissionMarker" type="Label3D" parent="." unique_id=710790149]

@@ -37,33 +37,33 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
-text = "Pausa"
+text = "Pause"
 horizontal_alignment = 1
 
 [node name="ContinueButton" type="Button" parent="Panel/VBox" unique_id=264449866]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Continuar"
+text = "Continue"
 
 [node name="SaveButton" type="Button" parent="Panel/VBox" unique_id=1576188635]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Guardar partida"
+text = "Save game"
 
 [node name="OptionsButton" type="Button" parent="Panel/VBox" unique_id=152398742]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Opciones"
+text = "Options"
 
 [node name="MenuButton" type="Button" parent="Panel/VBox" unique_id=449663092]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Volver al menú"
+text = "Back to menu"
 
 [node name="QuitButton" type="Button" parent="Panel/VBox" unique_id=397410477]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-text = "Salir del juego"
+text = "Quit game"
 
 [node name="SaveSlots" parent="." unique_id=1879231917 instance=ExtResource("3_f6eus")]
 anchors_preset = 15

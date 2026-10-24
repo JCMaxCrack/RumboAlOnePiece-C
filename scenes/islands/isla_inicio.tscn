@@ -1118,27 +1118,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 234.5631, 2.376976, 322.9908)
 [node name="Checkpoint2" parent="Checkpoints" unique_id=1264925162 instance=ExtResource("60_ckpt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 209.4, 16.08245, 196)
 checkpoint_id = "entrada_crater"
-display_name = "Entrada del cráter"
+display_name = "Crater Entrance"
 
 [node name="Checkpoint3" parent="Checkpoints" unique_id=2083005628 instance=ExtResource("60_ckpt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 290.22, 1.367783, 224.8377)
 checkpoint_id = "muelle"
-display_name = "Muelle del Going Merry"
+display_name = "Going Merry Dock"
 
 [node name="Checkpoint4" parent="Checkpoints" unique_id=1094361836 instance=ExtResource("60_ckpt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 2.874039, 190)
 checkpoint_id = "peninsula_oeste"
-display_name = "Península del oeste"
+display_name = "West Peninsula"
 
 [node name="Checkpoint5" parent="Checkpoints" unique_id=263396957 instance=ExtResource("60_ckpt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 152, 8.755409, 150)
 checkpoint_id = "bosque_noroeste"
-display_name = "Bosque del noroeste"
+display_name = "Northwest Forest"
 
 [node name="Checkpoint6" parent="Checkpoints" unique_id=313315879 instance=ExtResource("60_ckpt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 357, 2.530136, 224)
 checkpoint_id = "costa_este"
-display_name = "Costa este"
+display_name = "East Coast"
 
 
 

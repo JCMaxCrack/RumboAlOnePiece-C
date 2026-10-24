@@ -155,7 +155,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.65, 1, 1)
 theme_override_font_sizes/font_size = 16
-text = "Nv. 1"
+text = "Lv. 1"
 
 [node name="XpBar" type="ProgressBar" parent="Root/PlayerPanel/VBox/XpRow"]
 custom_minimum_size = Vector2(160, 10)
@@ -222,7 +222,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_oj5la")
 layout_mode = 2
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
 theme_override_font_sizes/font_size = 22
-text = "Carne: 0 / 10"
+text = "Meat: 0 / 10"
 
 [node name="MissionPanel" type="PanelContainer" parent="Root" unique_id=1466234601]
 layout_mode = 0
@@ -241,13 +241,13 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
 theme_override_font_sizes/font_size = 18
-text = "Misión de Koby"
+text = "Koby's Mission"
 
 [node name="MissionText" type="Label" parent="Root/MissionPanel/VBox" unique_id=707929874]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
 theme_override_font_sizes/font_size = 17
-text = "Habla con Koby"
+text = "Talk to Koby"
 autowrap_mode = 3
 
 [node name="BossBox" type="VBoxContainer" parent="Root" unique_id=1797542616]
@@ -264,7 +264,7 @@ offset_bottom = 110.0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.6, 0.45, 1)
 theme_override_font_sizes/font_size = 26
-text = "Buggy el Payaso"
+text = "Buggy the Clown"
 horizontal_alignment = 1
 
 [node name="BossHealthBar" type="ProgressBar" parent="Root/BossBox" unique_id=498245571]
@@ -290,7 +290,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.74, 0.8, 1)
 theme_override_font_sizes/font_size = 18
-text = "IA: Patrullando"
+text = "AI: Patrolling"
 horizontal_alignment = 1
 
 [node name="Message" type="Label" parent="Root" unique_id=728073357]
@@ -340,7 +340,7 @@ autowrap_mode = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.74, 0.8, 1)
 theme_override_font_sizes/font_size = 16
-text = "Pulsa E para continuar"
+text = "Press E to continue"
 horizontal_alignment = 2
 
 [node name="ControlsHint" type="Label" parent="Root" unique_id=1139240993]
@@ -355,7 +355,7 @@ offset_right = 600.0
 offset_bottom = -12.0
 theme_override_colors/font_color = Color(0.72, 0.74, 0.8, 1)
 theme_override_font_sizes/font_size = 16
-text = "WASD mover  ·  Shift correr  ·  Espacio saltar/nadar  ·  Clic/J golpe  ·  E hablar  ·  Mouse cámara  ·  F1 ver IA  ·  Esc pausa"
+text = "WASD move  ·  Shift run  ·  Space jump/swim  ·  Click/J punch  ·  E talk  ·  Mouse camera  ·  F1 show AI  ·  Esc pause"
 horizontal_alignment = 1
 
 [node name="FpsLabel" type="Label" parent="Root" unique_id=1992622063]
@@ -432,7 +432,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
 theme_override_font_sizes/font_size = 20
-text = "Habilidad"
+text = "Skill"
 
 [node name="Cooldown" type="ProgressBar" parent="Root/SkillBox/VBox"]
 custom_minimum_size = Vector2(220, 10)

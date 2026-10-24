@@ -1,9 +1,9 @@
 extends Node
-## Preferences (autoload, see project.godot): language and controls chosen in "Opciones".
+## Preferences (autoload, see project.godot): language and controls chosen in "Options".
 ## Kept in user://preferencias.cfg (not in the save slots).
 ##
-## Language: Spanish (the texts of the game) or English (assets/i18n/translations.csv, imported by
-## Godot as .translation files). TranslationServer changes every text on screen at once.
+## Language: English (the texts of the game, and the default) or Spanish (assets/i18n/translations.csv,
+## imported by Godot as .translation files). TranslationServer changes every text on screen at once.
 ##
 ## Controls: every action of REMAPPABLE has one key of the keyboard and one button (or stick
 ## direction) of the gamepad that the player can change. The defaults are the ones of
@@ -13,16 +13,16 @@ signal language_changed
 signal bindings_changed
 
 const FILE := "user://preferencias.cfg"
-const LANGUAGES := {"es": "Español", "en": "English"}
-## Actions that can be changed in Opciones -> Controles, with their name on screen.
+const LANGUAGES := {"en": "English", "es": "Español"}
+## Actions that can be changed in Options -> Controls, with their name on screen.
 const REMAPPABLE := [
-	["move_forward", "Avanzar"], ["move_back", "Retroceder"], ["move_left", "Izquierda"], ["move_right", "Derecha"],
-	["sprint", "Correr"], ["jump", "Saltar / nadar"], ["attack", "Golpe"], ["interact", "Hablar / usar"],
-	["use_item", "Comer / usar objeto"], ["next_item", "Cambiar objeto"], ["skill", "Habilidad"],
-	["next_skill", "Cambiar habilidad"], ["shop", "Tienda de habilidades"], ["map", "Mapa"], ["pause", "Pausa"],
+	["move_forward", "Forward"], ["move_back", "Backward"], ["move_left", "Left"], ["move_right", "Right"],
+	["sprint", "Run"], ["jump", "Jump / swim"], ["attack", "Punch"], ["interact", "Talk / use"],
+	["use_item", "Eat / use item"], ["next_item", "Switch item"], ["skill", "Skill"],
+	["next_skill", "Switch skill"], ["shop", "Skill shop"], ["map", "Map"], ["pause", "Pause"],
 ]
 
-var language := "es"
+var language := "en"
 ## Events of every remappable action as the player chose them (any device). GameSession builds the
 ## real InputMap from them (one gamepad per player in co-op).
 var bindings := {}
@@ -96,7 +96,7 @@ func reset_bindings() -> void:
 	_apply()
 
 
-## Text of the key or button of an action ("E", "Espacio", "Botón Y"...).
+## Text of the key or button of an action ("E", "Space", "Botón Y"...).
 func event_text(action: String, gamepad: bool) -> String:
 	return describe(get_event(action, gamepad))
 
@@ -107,7 +107,7 @@ static func describe(e: InputEvent) -> String:
 	if e is InputEventKey:
 		var k := e as InputEventKey
 		var code := k.physical_keycode if k.physical_keycode != 0 else k.keycode
-		var names := {KEY_SPACE: "Espacio", KEY_SHIFT: "Shift", KEY_ESCAPE: "Esc", KEY_TAB: "Tab", KEY_ENTER: "Enter",
+		var names := {KEY_SPACE: "Space", KEY_SHIFT: "Shift", KEY_ESCAPE: "Esc", KEY_TAB: "Tab", KEY_ENTER: "Enter",
 			KEY_UP: "↑", KEY_DOWN: "↓", KEY_LEFT: "←", KEY_RIGHT: "→", KEY_CTRL: "Ctrl", KEY_ALT: "Alt"}
 		if names.has(code):
 			return TranslationServer.translate(names[code])
@@ -118,12 +118,12 @@ static func describe(e: InputEvent) -> String:
 			JOY_BUTTON_RIGHT_SHOULDER: "RB", JOY_BUTTON_DPAD_UP: "D-pad ↑", JOY_BUTTON_DPAD_DOWN: "D-pad ↓",
 			JOY_BUTTON_DPAD_LEFT: "D-pad ←", JOY_BUTTON_DPAD_RIGHT: "D-pad →"}
 		var b := (e as InputEventJoypadButton).button_index
-		return TranslationServer.translate("Botón") + " " + str(names2.get(b, b))
+		return TranslationServer.translate("Button") + " " + str(names2.get(b, b))
 	if e is InputEventJoypadMotion:
 		var m := e as InputEventJoypadMotion
-		var axes := {JOY_AXIS_LEFT_X: "Stick izq. X", JOY_AXIS_LEFT_Y: "Stick izq. Y", JOY_AXIS_RIGHT_X: "Stick der. X",
-			JOY_AXIS_RIGHT_Y: "Stick der. Y", JOY_AXIS_TRIGGER_LEFT: "LT", JOY_AXIS_TRIGGER_RIGHT: "RT"}
-		return TranslationServer.translate(str(axes.get(m.axis, "Eje %d" % m.axis))) + (" +" if m.axis_value > 0.0 else " −")
+		var axes := {JOY_AXIS_LEFT_X: "Left stick X", JOY_AXIS_LEFT_Y: "Left stick Y", JOY_AXIS_RIGHT_X: "Right stick X",
+			JOY_AXIS_RIGHT_Y: "Right stick Y", JOY_AXIS_TRIGGER_LEFT: "LT", JOY_AXIS_TRIGGER_RIGHT: "RT"}
+		return TranslationServer.translate(str(axes.get(m.axis, "Axis %d" % m.axis))) + (" +" if m.axis_value > 0.0 else " −")
 	return "?"
 
 
@@ -183,9 +183,11 @@ func _load() -> void:
 	var cfg := ConfigFile.new()
 	if cfg.load(FILE) != OK:
 		return
-	language = str(cfg.get_value("general", "idioma", "es"))
+	# "language" (not the old "idioma" key, written when Spanish was the default): English unless
+	# the player chose another language
+	language = str(cfg.get_value("general", "language", "en"))
 	if not LANGUAGES.has(language):
-		language = "es"
+		language = "en"
 	for spec in REMAPPABLE:
 		var a: String = spec[0]
 		for gamepad in [false, true]:
@@ -198,7 +200,7 @@ func _load() -> void:
 
 func _save() -> void:
 	var cfg := ConfigFile.new()
-	cfg.set_value("general", "idioma", language)
+	cfg.set_value("general", "language", language)
 	for spec in REMAPPABLE:
 		var a: String = spec[0]
 		cfg.set_value("controles", "teclado_" + a, _to_text(get_event(a, false)))

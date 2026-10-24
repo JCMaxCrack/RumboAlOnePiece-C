@@ -1,0 +1,366 @@
+keys,en,es
+Patrolling,Patrolling,Patrullando
+He saw you!,He saw you!,¡Te vio!
+Chasing!,Chasing!,¡Persiguiendo!
+Attacking!,Attacking!,¡Atacando!
+Special attack!,Special attack!,¡Ataque especial!
+Returning,Returning,Regresando
+Defeated,Defeated,Derrotado
+Now you made me angry!,Now you made me angry!,¡Ahora sí me hiciste enojar!
+Too slow!,Too slow!,¡Demasiado lento!
+Shakushi!,Shakushi!,¡Shakushi!
+Fist of Love!,Fist of Love!,¡Puño del amor!
+Buggy the Clown,Buggy the Clown,Buggy el Payaso
+Evil Mushroom,Evil Mushroom,Hongo malvado
+Vice Admiral Garp,Vice Admiral Garp,Vicealmirante Garp
+Captain Kuro,Captain Kuro,Capitán Kuro
+Skeleton,Skeleton,Esqueleto
+Enemy,Enemy,Enemigo
+Captain. Stretchy rubber fists: he hits from far away.,Captain. Stretchy rubber fists: he hits from far away.,Capitán. Puños de goma que se estiran: golpea desde lejos.
+Swordsman. Three swords and lots of health: the toughest one.,Swordsman. Three swords and lots of health: the toughest one.,Espadachín. Tres espadas y mucha vida: el más resistente.
+Sniper. Shoots far-away enemies with his slingshot.,Sniper. Shoots far-away enemies with his slingshot.,Francotirador. Dispara con su tirachinas a los enemigos lejanos.
+"Navigator. Quick and agile, she fights with the Clima-Tact.","Navigator. Quick and agile, she fights with the Clima-Tact.","Navegante. Ágil y rápida, pelea con el Clima-Tact."
+Choose your character,Choose your character,Elige tu personaje
+Player 1: A/D or arrows and Enter (or click)  ·  Player 2: stick and A (B undoes)  ·  Esc: back,Player 1: A/D or arrows and Enter (or click)  ·  Player 2: stick and A (B undoes)  ·  Esc: back,Jugador 1: A/D o flechas y Enter (o clic)  ·  Jugador 2: stick y A (B deshace)  ·  Esc: volver
+The other player already chose %s,The other player already chose %s,%s ya lo eligió el otro jugador
+Off to adventure!,Off to adventure!,¡A la aventura!
+P%d ✓,P%d ✓,J%d ✓
+P%d,P%d,J%d
+Player %d,Player %d,Jugador %d
+Waiting for: %s,Waiting for: %s,Esperando a: %s
+South Beach,South Beach,Playa del sur
+Crater Entrance,Crater Entrance,Entrada del cráter
+Going Merry Dock,Going Merry Dock,Muelle del Going Merry
+West Peninsula,West Peninsula,Península del oeste
+Northwest Forest,Northwest Forest,Bosque del noroeste
+East Coast,East Coast,Costa este
+Syrup Village Port,Syrup Village Port,Puerto de Villa Syrup
+Village Center,Village Center,Aldea de Syrup
+Usopp's Hill,Usopp's Hill,Colina de Usopp
+Mansion Garden,Mansion Garden,Jardín de la mansión
+Whisky Peak Port,Whisky Peak Port,Puerto de Whisky Peak
+Entrance Arch,Entrance Arch,Arco de entrada
+Town Square,Town Square,Plaza del pueblo
+Great Cactus Plateau,Great Cactus Plateau,Meseta del gran cactus
+Choose an action to change its key or button,Choose an action to change its key or button,Elige una acción para cambiar su tecla o su botón
+Action,Action,Acción
+Keyboard,Keyboard,Teclado
+Gamepad,Gamepad,Mando
+Press the gamepad button for “%s” (Esc cancels),Press the gamepad button for “%s” (Esc cancels),Pulsa el botón del mando para «%s» (Esc cancela)
+Press the key for “%s” (Esc cancels),Press the key for “%s” (Esc cancels),Pulsa la tecla para «%s» (Esc cancela)
+Cancelled,Cancelled,Cancelado
+“%s” is now %s,“%s” is now %s,«%s» ahora es %s
+Controls reset,Controls reset,Controles restablecidos
+Adventure complete!,Adventure complete!,¡Aventura completada!
+"Luffy, Zoro, Usopp and Nami set sail together for the Grand Line.","Luffy, Zoro, Usopp and Nami set sail together for the Grand Line.","Luffy, Zoro, Usopp y Nami zarpan juntos rumbo al Grand Line."
+Level %d  ·  Time: %d:%02d,Level %d  ·  Time: %d:%02d,Nivel %d  ·  Tiempo: %d:%02d
+You were defeated!,You were defeated!,¡Te derrotaron!
+Boss: %s  ·  Meat collected: %d/%d,Boss: %s  ·  Meat collected: %d/%d,Jefe: %s  ·  Carne recogida: %d/%d
+still standing,still standing,sigue en pie
+Time: %d:%02d,Time: %d:%02d,Tiempo: %d:%02d
+You did it!,You did it!,¡Lo lograste!
+Back to the checkpoint,Back to the checkpoint,Volver al punto de control
+Play again,Play again,Jugar de nuevo
+Main menu,Main menu,Menú principal
+Clown Island,Clown Island,Isla del Payaso
+Syrup Village,Syrup Village,Villa Syrup
+Meat,Meat,Carne
+Tangerine,Tangerine,Mandarina
+Mansion key,Mansion key,Llave de la mansión
+Spinning kick: hits every enemy around you.,Spinning kick: hits every enemy around you.,Patada giratoria: golpea a todos los enemigos a tu alrededor.
+Two-palm shove: big damage and sends the enemy flying.,Two-palm shove: big damage and sends the enemy flying.,Empujón con las dos palmas: mucho daño y lanza lejos al enemigo.
+A rain of punches in front of you: many hits in a row.,A rain of punches in front of you: many hits in a row.,Lluvia de puñetazos hacia delante: muchos golpes seguidos.
+You puff up like a balloon: nothing hurts you and you push enemies away.,You puff up like a balloon: nothing hurts you and you push enemies away.,Te inflas como un globo: nada te hace daño y empujas a los enemigos.
+Heel axe-drop: a shock wave in front of you.,Heel axe-drop: a shock wave in front of you.,Hachazo con el talón: una onda de choque delante de ti.
+A storm of punches in every direction.,A storm of punches in every direction.,Tormenta de golpes en todas las direcciones.
+Cross cut with the three swords: big damage in front of you.,Cross cut with the three swords: big damage in front of you.,Corte cruzado con las tres espadas: mucho daño delante de ti.
+A tornado of cuts that hits everyone around you.,A tornado of cuts that hits everyone around you.,Un tornado de cortes que golpea a todos a tu alrededor.
+A flying cut: hits far-away enemies.,A flying cut: hits far-away enemies.,Un corte que vuela: golpea a los enemigos lejanos.
+A flurry of cuts in front of you.,A flurry of cuts in front of you.,Una ráfaga de cortes seguidos hacia delante.
+A cannon blast of cutting air: a shock wave in front of you.,A cannon blast of cutting air: a shock wave in front of you.,Un cañonazo de aire cortante: una onda de choque delante de ti.
+Nine swords: cuts in every direction.,Nine swords: cuts in every direction.,Nueve espadas: cortes en todas las direcciones.
+A lead ball: big damage to a far-away enemy.,A lead ball: big damage to a far-away enemy.,Una bola de plomo: mucho daño a un enemigo lejano.
+A five-ton hammer blow! (or so Usopp says).,A five-ton hammer blow! (or so Usopp says).,¡Martillazo de cinco toneladas! (o eso dice Usopp).
+A fire star that burns whoever it touches.,A fire star that burns whoever it touches.,Una estrella de fuego que quema a quien toca.
+Three rotten eggs at once: a fan of shots.,Three rotten eggs at once: a fan of shots.,Tres huevos podridos a la vez: abanico de disparos.
+A cloud of smoke: nothing hurts you and enemies back away.,A cloud of smoke: nothing hurts you and enemies back away.,Una nube de humo: nada te hace daño y los enemigos retroceden.
+Gunpowder blasts all around you.,Gunpowder blasts all around you.,Explosiones de pólvora a tu alrededor.
+A cyclone from the Clima-Tact that blows enemies away.,A cyclone from the Clima-Tact that blows enemies away.,Un ciclón con el Clima-Tact que lanza lejos a los enemigos.
+Lightning strikes in front of you.,Lightning strikes in front of you.,Un rayo cae delante de ti.
+Three bubbles of cold air in a fan.,Three bubbles of cold air in a fan.,Tres burbujas de aire frío en abanico.
+A mirage: nothing hurts you and enemies get confused.,A mirage: nothing hurts you and enemies get confused.,Un espejismo: nada te hace daño y confundes a los enemigos.
+A bubble of hot air that bursts on touch.,A bubble of hot air that bursts on touch.,Una burbuja de aire caliente que estalla al tocar.
+Spears of lightning fall all around you.,Spears of lightning fall all around you.,Lanzas de rayo caen a tu alrededor.
+"One more thing: in the northwest forest the Marines have a swordsman tied up, Roronoa Zoro. Recruit Zoro for your crew!","One more thing: in the northwest forest the Marines have a swordsman tied up, Roronoa Zoro. Recruit Zoro for your crew!","Una cosa más: en el bosque del noroeste los marines tienen atado a un espadachín, Roronoa Zoro. ¡Recluta a Zoro para tu tripulación!"
+And how lucky that Zoro the swordsman already sails with you!,And how lucky that Zoro the swordsman already sails with you!,"¡Y qué suerte que Zoro, el espadachín, ya viaja contigo!"
+Talk to Koby!,Talk to Koby!,¡Habla con Koby!
+Talk,Talk,Hablar
+[E] Talk,[E] Talk,[E] Hablar
+"You did it, Luffy-san! You're amazing!","You did it, Luffy-san! You're amazing!","¡Lo lograste, Luffy-san! ¡Eres increíble!"
+The Going Merry is waiting at the dock: take the helm and sail to Syrup Village. I'll see you there!,The Going Merry is waiting at the dock: take the helm and sail to Syrup Village. I'll see you there!,El Going Merry te espera en el muelle: toma el timón y navega hasta Villa Syrup. ¡Te veré allí!
+"Food at last! ...Fine, I'll join your crew.","Food at last! ...Fine, I'll join your crew.","¡Por fin comida! ...Está bien, me uniré a tu tripulación."
+"But listen: my dream is to be the greatest swordsman in the world. Don't you forget it, captain!","But listen: my dream is to be the greatest swordsman in the world. Don't you forget it, captain!","Pero escucha: mi sueño es ser el mejor espadachín del mundo. ¡Que no se te olvide, capitán!"
+And who are you? I'm Roronoa Zoro. The Marines tied me up here and I haven't eaten in days...,And who are you? I'm Roronoa Zoro. The Marines tied me up here and I haven't eaten in days...,¿Y tú quién eres? Soy Roronoa Zoro. Los marines me ataron aquí y llevo días sin comer...
+Bring me %d pieces of meat and I'll join your crew. (You have %d),Bring me %d pieces of meat and I'll join your crew. (You have %d),"Si me traes %d carnes, me uniré a tu tripulación. (Tienes %d)"
+defeat Buggy in the crater,defeat Buggy in the crater,derrotar a Buggy en el cráter
+collect %d more meat,collect %d more meat,recolectar %d carne(s) más
+recruit Zoro in the northwest forest,recruit Zoro in the northwest forest,reclutar a Zoro en el bosque del noroeste
+"Keep going, Luffy-san! You still need to ","Keep going, Luffy-san! You still need to ","¡Ánimo, Luffy-san! Todavía te falta "
+ and , and , y 
+Talk to Koby on the south beach,Talk to Koby on the south beach,Habla con Koby en la playa del sur
+Island complete!,Island complete!,¡Isla completada!
+Take the Going Merry's helm and sail to Syrup Village,Take the Going Merry's helm and sail to Syrup Village,Toma el timón del Going Merry y navega hasta Villa Syrup
+Defeat Buggy the Clown,Defeat Buggy the Clown,Derrota a Buggy el Payaso
+Collect the meat (%d/%d),Collect the meat (%d/%d),Recolecta la carne (%d/%d)
+Recruit Zoro,Recruit Zoro,Recluta a Zoro
+Buggy saw you!,Buggy saw you!,¡Buggy te vio!
+You got away!,You got away!,¡Escapaste!
+You defeated Buggy the Clown!,You defeated Buggy the Clown!,¡Derrotaste a Buggy el Payaso!
+Compatibility (OpenGL),Compatibility (OpenGL),Compatibilidad (OpenGL)
+Low,Low,Bajo
+Medium,Medium,Medio
+High,High,Alto
+"For phones and low-end PCs: no shadows or effects, shorter view distance.","For phones and low-end PCs: no shadows or effects, shorter view distance.","Para teléfonos y PC de gama baja: sin sombras ni efectos, menos distancia."
+"Balanced: close shadows, glow and longer draw distance.","Balanced: close shadows, glow and longer draw distance.","Equilibrado: sombras cercanas, brillo y más distancia de dibujo."
+"For powerful PCs: soft distant shadows, ambient occlusion and the whole island.","For powerful PCs: soft distant shadows, ambient occlusion and the whole island.","Para PC potentes: sombras suaves lejanas, oclusión ambiental y toda la isla."
+Graphics options,Graphics options,Opciones gráficas
+Quality,Quality,Calidad
+Render resolution,Render resolution,Resolución de render
+Language,Language,Idioma
+Fullscreen  (F11 / Alt+Enter),Fullscreen  (F11 / Alt+Enter),Pantalla completa  (F11 / Alt+Enter)
+Show FPS,Show FPS,Mostrar FPS
+Joystick: move (run at the edge)  ·  Drag on the right: camera,Joystick: move (run at the edge)  ·  Drag on the right: camera,Joystick: mover (al borde corre)  ·  Arrastra a la derecha: cámara
+Meat: %d / %d,Meat: %d / %d,Carne: %d / %d
+Lv. %d,Lv. %d,Nv. %d
+Lv. 1,Lv. 1,Nv. 1
+Tap “%s”,Tap “%s”,Toca «%s»
+%s move  ·  %s run  ·  %s jump/swim  ·  Click/%s punch  ·  %s talk  ·  %s map  ·  %s pause,%s move  ·  %s run  ·  %s jump/swim  ·  Click/%s punch  ·  %s talk  ·  %s map  ·  %s pause,%s mover  ·  %s correr  ·  %s saltar/nadar  ·  Clic/%s golpe  ·  %s hablar  ·  %s mapa  ·  %s pausa
+%s/%s sail  ·  %s/%s helm  ·  %s full sail  ·  %s chart  ·  %s dock / let go,%s/%s sail  ·  %s/%s helm  ·  %s full sail  ·  %s chart  ·  %s dock / let go,%s/%s vela  ·  %s/%s timón  ·  %s a toda vela  ·  %s carta  ·  %s atracar / soltar
+%s eat  ·  %s switch,%s eat  ·  %s switch,%s comer  ·  %s cambiar
+%s use  ·  %s switch  ·  %s shop,%s use  ·  %s switch  ·  %s shop,%s usar  ·  %s cambiar  ·  %s tienda
+AI: ,AI: ,IA: 
+AI: Patrolling,AI: Patrolling,IA: Patrullando
+Tap “Next”,Tap “Next”,Toca «Seguir»
+Press %s,Press %s,Pulsa %s
+ to close, to close, para cerrar
+ to continue, to continue, para continuar
+Meat: 0 / 10,Meat: 0 / 10,Carne: 0 / 10
+Koby's Mission,Koby's Mission,Misión de Koby
+Talk to Koby,Talk to Koby,Habla con Koby
+Press E to continue,Press E to continue,Pulsa E para continuar
+WASD move  ·  Shift run  ·  Space jump/swim  ·  Click/J punch  ·  E talk  ·  Mouse camera  ·  F1 show AI  ·  Esc pause,WASD move  ·  Shift run  ·  Space jump/swim  ·  Click/J punch  ·  E talk  ·  Mouse camera  ·  F1 show AI  ·  Esc pause,WASD mover  ·  Shift correr  ·  Espacio saltar/nadar  ·  Clic/J golpe  ·  E hablar  ·  Mouse cámara  ·  F1 ver IA  ·  Esc pausa
+Tap “Talk”,Tap “Talk”,Toca «Hablar»
+Game %d loaded,Game %d loaded,Partida %d cargada
+Talk to Koby to get your mission,Talk to Koby to get your mission,Habla con Koby para recibir tu misión
+New mission!,New mission!,¡Nueva misión!
+%s joined the crew!,%s joined the crew!,¡%s se unió a la tripulación!
+Inventory full! Eat something to make room (Q),Inventory full! Eat something to make room (Q),¡Inventario lleno! Come algo para hacer sitio (Q)
+%s saw you!,%s saw you!,¡%s te vio!
+You defeated %s!,You defeated %s!,¡Derrotaste a %s!
+%s! Stored in the inventory (Q to eat),%s! Stored in the inventory (Q to eat),¡%s! Guardada en el inventario (Q para comer)
+%s!,%s!,¡%s!
+Checkpoint: %s,Checkpoint: %s,Punto de control: %s
+Game saved,Game saved,Partida guardada
+Luffy-san! I'm so glad you made it to the island!,Luffy-san! I'm so glad you made it to the island!,¡Luffy-san! ¡Qué bueno que llegaste a la isla!
+"Buggy the Clown is hiding in the volcano crater, in the middle of the island, and he has everyone terrified.","Buggy the Clown is hiding in the volcano crater, in the middle of the island, and he has everyone terrified.","Buggy el Payaso se escondió en el cráter del volcán, en el centro de la isla, y tiene a todos aterrorizados."
+Your mission: defeat Buggy and collect all the meat scattered around the island!,Your mission: defeat Buggy and collect all the meat scattered around the island!,Tu misión: ¡derrota a Buggy y recolecta toda la carne que está repartida por la isla!
+Every piece of meat gives you health back. And the Going Merry is anchored in the northeast inlet: go up the gangway from the dock.,Every piece of meat gives you health back. And the Going Merry is anchored in the northeast inlet: go up the gangway from the dock.,Cada carne te devuelve vida. Y el Going Merry está anclado en la ensenada del noreste: sube por el puente del muelle.
+Co-op: split screen. Player 1: keyboard and mouse. Player 2: gamepad. Each one picks a character.,Co-op: split screen. Player 1: keyboard and mouse. Player 2: gamepad. Each one picks a character.,Cooperativo: pantalla dividida. Jugador 1: teclado y mouse. Jugador 2: mando. Cada uno elige su personaje.
+"For co-op, connect a gamepad: player 2 plays with it.","For co-op, connect a gamepad: player 2 plays with it.",Para el modo cooperativo conecta un mando: el jugador 2 juega con él.
+FINDING THE,FINDING THE,RUMBO AL
+BETA · Koby's Mission,BETA · Koby's Mission,BETA · La misión de Koby
+Play,Play,Jugar
+Controls,Controls,Controles
+Options,Options,Opciones
+Quit,Quit,Salir
+Back,Back,Volver
+How do you want to play?,How do you want to play?,¿Cómo quieres jugar?
+Single player,Single player,Un jugador
+Co-op (2 players),Co-op (2 players),Cooperativo (2 jugadores)
+Food,Food,Comida
+Key,Key,Llave
+Boss,Boss,Jefe
+Character,Character,Personaje
+Checkpoint,Checkpoint,Punto de control
+Destination,Destination,Destino
+Sea chart,Sea chart,Mapa del mar
+Choose an island: mouse or stick  ·  Click/A: view the island  ·  Esc/B/M: close,Choose an island: mouse or stick  ·  Click/A: view the island  ·  Esc/B/M: close,Elige una isla: ratón o stick  ·  Clic/A: ver la isla  ·  Esc/B/M: cerrar
+Course set,Course set,Rumbo fijado
+Q/X: set course,Q/X: set course,Q/X: fijar rumbo
+Wheel/triggers: zoom  ·  Drag/right stick: move  ·  Esc/B: back  ·  M: close,Wheel/triggers: zoom  ·  Drag/right stick: move  ·  Esc/B: back  ·  M: close,Rueda/gatillos: zoom  ·  Arrastrar/stick derecho: mover  ·  Esc/B: volver  ·  M: cerrar
+You haven't discovered this island yet,You haven't discovered this island yet,Aún no descubres esta isla
+Get closer to the island to see what is on it,Get closer to the island to see what is on it,Acércate a la isla para ver lo que hay en ella
+Dock,Dock,Muelle
+Player,Player,Jugador
+Forward,Forward,Avanzar
+Backward,Backward,Retroceder
+Left,Left,Izquierda
+Right,Right,Derecha
+Run,Run,Correr
+Jump / swim,Jump / swim,Saltar / nadar
+Punch,Punch,Golpe
+Talk / use,Talk / use,Hablar / usar
+Eat / use item,Eat / use item,Comer / usar objeto
+Switch item,Switch item,Cambiar objeto
+Skill,Skill,Habilidad
+Switch skill,Switch skill,Cambiar habilidad
+Skill shop,Skill shop,Tienda de habilidades
+Map,Map,Mapa
+Pause,Pause,Pausa
+Space,Space,Espacio
+Button,Button,Botón
+Left stick X,Left stick X,Stick izq. X
+Left stick Y,Left stick Y,Stick izq. Y
+Right stick X,Right stick X,Stick der. X
+Right stick Y,Right stick Y,Stick der. Y
+Axis %d,Axis %d,Eje %d
+%s  (you are here),%s  (you are here),%s  (estás aquí)
+(complete the previous island),(complete the previous island),(completa la isla anterior)
+Choose the Going Merry's course,Choose the Going Merry's course,Elige el rumbo del Going Merry
+Navigation chart,Navigation chart,Carta de navegación
+Cancel,Cancel,Cancelar
+Choose a game,Choose a game,Elige una partida
+Save game,Save game,Guardar partida
+Game %d,Game %d,Partida %d
+Load,Load,Cargar
+Save here,Save here,Guardar aquí
+Empty,Empty,Vacía
+Save modified or damaged! It can't be loaded,Save modified or damaged! It can't be loaded,¡Guardado modificado o dañado! No se puede cargar
+Co-op,Co-op,Cooperativo
+Crew: %d,Crew: %d,Tripulación: %d
+It's a co-op game: connect a gamepad for player 2.,It's a co-op game: connect a gamepad for player 2.,Es una partida cooperativa: conecta un mando para el jugador 2.
+That game can't be loaded.,That game can't be loaded.,Esa partida no se puede cargar.
+Replace Game %d with the current progress?,Replace Game %d with the current progress?,¿Reemplazar la Partida %d con el progreso actual?
+Start a new game in Game %d? What it had will be lost.,Start a new game in Game %d? What it had will be lost.,¿Empezar una partida nueva en la Partida %d? Se perderá lo que tenía.
+Delete Game %d?,Delete Game %d?,¿Borrar la Partida %d?
+Game %d deleted.,Game %d deleted.,Partida %d borrada.
+Game %d saved.,Game %d saved.,Partida %d guardada.
+Could not save.,Could not save.,No se pudo guardar.
+Game 1  ·  Empty,Game 1  ·  Empty,Partida 1  ·  Vacía
+Game 2  ·  Empty,Game 2  ·  Empty,Partida 2  ·  Vacía
+Game 3  ·  Empty,Game 3  ·  Empty,Partida 3  ·  Vacía
+Game 4  ·  Empty,Game 4  ·  Empty,Partida 4  ·  Vacía
+New,New,Nueva
+Delete,Delete,Borrar
+Are you sure?,Are you sure?,¿Seguro?
+Yes,Yes,Sí
+%s  ·  Level %d  ·  Skill points: %d,%s  ·  Level %d  ·  Skill points: %d,%s  ·  Nivel %d  ·  Puntos de habilidad: %d
+%d point(s),%d point(s),%d punto(s)
+Damage %d · cooldown %d s,Damage %d · cooldown %d s,Daño %d · espera %d s
+Equipped,Equipped,Equipada
+Equip,Equip,Equipar
+Learn,Learn,Aprender
+Unlocks when you reach %s,Unlocks when you reach %s,Se desbloquea al llegar a %s
+Locked,Locked,Bloqueada
+You learned %s!,You learned %s!,¡Aprendiste %s!
+Skill equipped: %s,Skill equipped: %s,Habilidad equipada: %s
+Close,Close,Cerrar
+Koby is waiting for you at the port,Koby is waiting for you at the port,Koby te espera en el puerto
+Open the gate,Open the gate,Abrir la reja
+"Luffy-san! I got here before you on a Marine ship. Listen, this village is in danger.","Luffy-san! I got here before you on a Marine ship. Listen, this village is in danger.","¡Luffy-san! Llegué antes que tú en un barco de la Marina. Escucha, esta aldea está en peligro."
+"A boy from here, Usopp, says that Klahadore, the butler of the north mansion, is really Captain Kuro.","A boy from here, Usopp, says that Klahadore, the butler of the north mansion, is really Captain Kuro.","Un chico de aquí, Usopp, dice que Klahadore, el mayordomo de la mansión del norte, es en realidad el Capitán Kuro."
+Nobody believes him because he always tells lies... but I think this time he's telling the truth.,Nobody believes him because he always tells lies... but I think this time he's telling the truth.,Nadie le cree porque siempre dice mentiras... pero yo creo que esta vez dice la verdad.
+"The mansion gate is locked. The key is in the crypt of the old east graveyard, full of skeletons.","The mansion gate is locked. The key is in the crypt of the old east graveyard, full of skeletons.","La reja de la mansión está cerrada con llave. La llave está en la cripta del viejo cementerio del este, lleno de esqueletos."
+"Your mission: get the key, go into the mansion and defeat Kuro. They say he walks its halls without a sound.","Your mission: get the key, go into the mansion and defeat Kuro. They say he walks its halls without a sound.","Tu misión: consigue la llave, entra en la mansión y derrota a Kuro. Dicen que recorre sus pasillos sin hacer ruido."
+"Usopp lives on the west hill, above the village. He'll surely want to go with you once Kuro falls!","Usopp lives on the west hill, above the village. He'll surely want to go with you once Kuro falls!","Usopp vive en la colina del oeste, sobre la aldea. ¡Seguro que querrá ir contigo cuando Kuro caiga!"
+"The village is safe thanks to you, Luffy-san!","The village is safe thanks to you, Luffy-san!","¡La aldea está a salvo gracias a ti, Luffy-san!"
+The next island is Whisky Peak. Take the Going Merry's helm: I'll see you there!,The next island is Whisky Peak. Take the Going Merry's helm: I'll see you there!,La siguiente isla es Whisky Peak. Toma el timón del Going Merry: ¡te veré allí!
+"Stop right there! I'm the great Captain Usopp, with 8000 men under my command!","Stop right there! I'm the great Captain Usopp, with 8000 men under my command!","¡Alto ahí! ¡Soy el gran capitán Usopp, con 8000 hombres a mis órdenes!"
+"...Well, no. But you have to believe me: the mansion's butler is Captain Kuro! Talk to that Marine boy at the port.","...Well, no. But you have to believe me: the mansion's butler is Captain Kuro! Talk to that Marine boy at the port.","...Bueno, no. Pero tienes que creerme: ¡el mayordomo de la mansión es el Capitán Kuro! Habla con ese chico de la Marina del puerto."
+You did it! Kuro is defeated and the village is safe!,You did it! Kuro is defeated and the village is safe!,¡Lo lograste! ¡Kuro está derrotado y la aldea está a salvo!
+"I always wanted to be a brave warrior of the sea... Captain Luffy, the great Usopp joins your crew!","I always wanted to be a brave warrior of the sea... Captain Luffy, the great Usopp joins your crew!","Siempre quise ser un valiente guerrero del mar... ¡Capitán Luffy, el gran Usopp se une a tu tripulación!"
+Kuro is still in the mansion! I... I'll guard the village from here. Be careful!,Kuro is still in the mansion! I... I'll guard the village from here. Be careful!,¡Kuro sigue en la mansión! Yo... yo vigilo la aldea desde aquí. ¡Ten cuidado!
+The key is in the crypt of the old east graveyard. Watch out for the skeletons!,The key is in the crypt of the old east graveyard. Watch out for the skeletons!,La llave está en la cripta del viejo cementerio del este. ¡Cuidado con los esqueletos!
+"You have the key! Use it on the mansion gate, on the north plateau.","You have the key! Use it on the mansion gate, on the north plateau.","¡Tienes la llave! Úsala en la reja de la mansión, en la meseta del norte."
+Kuro is inside the mansion. Search the halls and corridors... be careful!,Kuro is inside the mansion. Search the halls and corridors... be careful!,Kuro está dentro de la mansión. Recorre los salones y los pasillos... ¡ten cuidado!
+Kuro has fallen! Usopp is waiting for you on the west hill.,Kuro has fallen! Usopp is waiting for you on the west hill.,¡Kuro cayó! Usopp te espera en la colina del oeste.
+Mansion gate,Mansion gate,Reja de la mansión
+The gate is locked.,The gate is locked.,La reja está cerrada con llave.
+The mansion gate is open!,The mansion gate is open!,¡La reja de la mansión está abierta!
+Talk to Koby at the port,Talk to Koby at the port,Habla con Koby en el puerto
+Take the Going Merry's helm and sail to Whisky Peak,Take the Going Merry's helm and sail to Whisky Peak,Toma el timón del Going Merry y navega hasta Whisky Peak
+Find the key in the graveyard,Find the key in the graveyard,Encuentra la llave en el cementerio
+Open the mansion gate,Open the mansion gate,Abre la reja de la mansión
+Defeat Captain Kuro in the mansion,Defeat Captain Kuro in the mansion,Derrota al Capitán Kuro en la mansión
+Recruit Usopp on the hill,Recruit Usopp on the hill,Recluta a Usopp en la colina
+The mansion key! Use it on the gate on the north plateau,The mansion key! Use it on the gate on the north plateau,¡La llave de la mansión! Úsala en la reja de la meseta del norte
+You defeated Captain Kuro! Go find Usopp on the hill,You defeated Captain Kuro! Go find Usopp on the hill,¡Derrotaste al Capitán Kuro! Ve a buscar a Usopp a la colina
+Jump,Jump,Saltar
+Koby is waiting for you at the town entrance,Koby is waiting for you at the town entrance,Koby te espera en la entrada del pueblo
+"Luffy-san, bad news! Vice Admiral Garp of the Marines arrived in Whisky Peak... and he says he's your grandfather!","Luffy-san, bad news! Vice Admiral Garp of the Marines arrived in Whisky Peak... and he says he's your grandfather!","¡Luffy-san, malas noticias! El vicealmirante Garp de la Marina llegó a Whisky Peak... ¡y dice que es tu abuelo!"
+"He wants to drag you into the Marines with his fists. He's waiting for you on the great cactus plateau, north of the town.","He wants to drag you into the Marines with his fists. He's waiting for you on the great cactus plateau, north of the town.","Quiere llevarte a la Marina a puñetazos. Te espera en la meseta del gran cactus, al norte del pueblo."
+"And in the square is Nami, the best navigator in the East Blue. Without her you'll never reach the Grand Line.","And in the square is Nami, the best navigator in the East Blue. Without her you'll never reach the Grand Line.","Y en la plaza está Nami, la mejor navegante de East Blue. Sin ella nunca llegarán al Grand Line."
+She says she'll only join a crew that brings her %d tangerines from the trees among the cacti.,She says she'll only join a crew that brings her %d tangerines from the trees among the cacti.,Dice que solo se unirá a una tripulación que le traiga %d mandarinas de los árboles entre los cactus.
+"Garp is very strong: recruit Nami first so she can help you, then defeat Garp!","Garp is very strong: recruit Nami first so she can help you, then defeat Garp!",Garp es muy fuerte: ¡recluta primero a Nami para que te ayude y luego derrota a Garp!
+"Amazing, Luffy-san! Someday you'll be the King of the Pirates.","Amazing, Luffy-san! Someday you'll be the King of the Pirates.","¡Increíble, Luffy-san! Algún día serás el Rey de los Piratas."
+"Hi. I'm Nami, the best navigator in the East Blue.","Hi. I'm Nami, the best navigator in the East Blue.","Hola. Soy Nami, la mejor navegante de East Blue."
+A pirate? Hmm... talk to that Marine boy at the entrance first.,A pirate? Hmm... talk to that Marine boy at the entrance first.,¿Un pirata? Hmm... habla primero con ese chico de la Marina de la entrada.
+You gave Nami %d tangerines,You gave Nami %d tangerines,Le diste %d mandarinas a Nami
+"My tangerines! All right, captain: from today I'm the navigator of the Straw Hat Pirates.","My tangerines! All right, captain: from today I'm the navigator of the Straw Hat Pirates.","¡Mis mandarinas! Está bien, capitán: desde hoy soy la navegante de los Piratas del Sombrero de Paja."
+"Garp, the hero of the Marines? He's incredibly strong... but together we'll beat him! Let's go to the great cactus plateau.","Garp, the hero of the Marines? He's incredibly strong... but together we'll beat him! Let's go to the great cactus plateau.","¿Garp, el héroe de la Marina? Es fortísimo... ¡pero juntos le daremos una paliza! Vamos a la meseta del gran cactus."
+I still need tangerines: you have %d of %d. They grow among the cactus rocks.,I still need tangerines: you have %d of %d. They grow among the cactus rocks.,Todavía me faltan mandarinas: tienes %d de %d. Crecen entre las rocas de cactus.
+"Look for the tangerines among the cactus rocks and take them to Nami, in the square.","Look for the tangerines among the cactus rocks and take them to Nami, in the square.","Busca las mandarinas entre las rocas de cactus y llévaselas a Nami, en la plaza."
+Nami is waiting for you in the square!,Nami is waiting for you in the square!,¡Nami te espera en la plaza!
+"Garp is waiting on the great cactus plateau, to the north. He throws cannonballs from far away!","Garp is waiting on the great cactus plateau, to the north. He throws cannonballs from far away!","Garp te espera en la meseta del gran cactus, al norte. ¡Lanza balas de cañón desde lejos!"
+Talk to Koby at the town entrance,Talk to Koby at the town entrance,Habla con Koby en la entrada del pueblo
+Defeat Vice Admiral Garp,Defeat Vice Admiral Garp,Derrota al vicealmirante Garp
+Bring tangerines to Nami (%d/%d),Bring tangerines to Nami (%d/%d),Lleva mandarinas a Nami (%d/%d)
+Recruit Nami,Recruit Nami,Recluta a Nami
+You defeated Vice Admiral Garp!,You defeated Vice Admiral Garp!,¡Derrotaste al vicealmirante Garp!
+You defeated Garp! Now recruit Nami,You defeated Garp! Now recruit Nami,¡Derrotaste a Garp! Ahora recluta a Nami
+Heading to %s,Heading to %s,Rumbo a %s
+Follow the compass and the light over its port,Follow the compass and the light over its port,Sigue la brújula y la luz sobre su puerto
+%s fell! Back in a moment,%s fell! Back in a moment,¡%s cayó! Volverá en un momento
+Take the helm,Take the helm,Tomar el timón
+Dock at %s,Dock at %s,Atracar en %s
+Let go of the helm,Let go of the helm,Soltar el timón
+Next,Next,Seguir
+You have nothing in that slot,You have nothing in that slot,No tienes nada en esa casilla
+%s: it's used somewhere else,%s: it's used somewhere else,%s: se usa en otro lugar
+Your health is already full,Your health is already full,Ya tienes toda la vida
+Learn attacks in the skill shop (%s),Learn attacks in the skill shop (%s),Aprende ataques en la tienda de habilidades (%s)
+%s: wait %.1f s,%s: wait %.1f s,%s: espera %.1f s
+open sea,open sea,mar abierto
+Set sail!,Set sail!,¡Zarpamos!
+Heading to %s  ·  %s navigation chart,Heading to %s  ·  %s navigation chart,Rumbo a %s  ·  %s carta de navegación
+You let go of the helm: the Going Merry is anchored,You let go of the helm: the Going Merry is anchored,Soltaste el timón: el Going Merry está anclado
+Docking at %s...,Docking at %s...,Atracando en %s...
+Back in %s,Back in %s,De vuelta en %s
+Watch out for the coast! Find the port to dock,Watch out for the coast! Find the port to dock,¡Cuidado con la costa! Busca el puerto para atracar
+Beyond here the sea is too dangerous: turn back,Beyond here the sea is too dangerous: turn back,Más allá el mar es demasiado peligroso: da la vuelta
+A storm surrounds %s. Complete %s first,A storm surrounds %s. Complete %s first,Una tormenta rodea %s. Completa antes %s
+Level %d!,Level %d!,¡Nivel %d!
+%s reached level %d! %d skill point(s): open the shop (%s),%s reached level %d! %d skill point(s): open the shop (%s),¡%s subió al nivel %d! Tiene %d punto(s) de habilidad: abre la tienda (%s)
+You reached level %d! You have %d skill point(s): open the shop (%s),You reached level %d! You have %d skill point(s): open the shop (%s),¡Subiste al nivel %d! Tienes %d punto(s) de habilidad: abre la tienda (%s)
+Board the Going Merry and take the helm to sail to %s,Board the Going Merry and take the helm to sail to %s,Sube al Going Merry y toma el timón para navegar hasta %s
+Continue,Continue,Continuar
+Back to menu,Back to menu,Volver al menú
+Quit game,Quit game,Salir del juego
+"Talk to Koby on every island: he gives you its mission.
+
+WASD / arrows: move  ·  Shift: run
+Space: jump (in the water: swim up)
+Left click / J: attack  ·  R: skill  ·  F: switch skill  ·  K: skill shop
+Q: eat  ·  Tab: switch item  ·  M: map
+E: talk / take the helm  ·  Mouse: camera  ·  Esc: pause
+
+On a phone: joystick on the left, drag on the right for the camera and use the buttons.","Talk to Koby on every island: he gives you its mission.
+
+WASD / arrows: move  ·  Shift: run
+Space: jump (in the water: swim up)
+Left click / J: attack  ·  R: skill  ·  F: switch skill  ·  K: skill shop
+Q: eat  ·  Tab: switch item  ·  M: map
+E: talk / take the helm  ·  Mouse: camera  ·  Esc: pause
+
+On a phone: joystick on the left, drag on the right for the camera and use the buttons.","Habla con Koby en cada isla: te da su misión.
+
+WASD / flechas: mover  ·  Shift: correr
+Espacio: saltar (en el agua: subir nadando)
+Clic izquierdo / J: atacar  ·  R: habilidad  ·  F: cambiar habilidad  ·  K: tienda de habilidades
+Q: comer  ·  Tab: cambiar objeto  ·  M: mapa
+E: hablar / tomar el timón  ·  Mouse: cámara  ·  Esc: pausa
+
+En el teléfono: joystick a la izquierda, arrastra a la derecha para la cámara y usa los botones."
+ONE PIECE,ONE PIECE,ONE PIECE
+Renderer,Renderer,Renderizador
+Finding the One Piece,Finding the One Piece,Rumbo al One Piece

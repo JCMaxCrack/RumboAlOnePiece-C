@@ -4,9 +4,10 @@ extends IslandWorld
 ## Admiral Garp (Luffy's grandfather!) arrived to take him to the Navy... by force. And Nami, the
 ## best navigator of East Blue, is in the town square: she would join a crew that brings her
 ## tangerines.
-##   1. defeat Garp, who waits on the plateau of the great cactus, north of the town;
-##   2. pick 5 tangerines from among the cactus rocks and give them to Nami;
-##   3. Nami joins the crew as navigator. It is the last island of this version: the voyage ends.
+##   1. pick 5 tangerines from among the cactus rocks and give them to Nami: she joins the crew as
+##      navigator at once (and fights Garp with Luffy);
+##   2. defeat Garp, who waits on the plateau of the great cactus, north of the town. He is the
+##      hardest boss of the voyage. It is the last island of this version: the voyage ends.
 
 const ORANGES_FOR_NAMI := 5
 
@@ -32,7 +33,7 @@ func arrival_message(loaded: bool) -> void:
 	if loaded:
 		super(loaded)
 	elif mission == Mission.NOT_GIVEN:
-		hud.show_banner(tr("Whisky Peak"), tr("Koby te espera en la entrada del pueblo"), 3.0)
+		hud.show_banner(tr("Whisky Peak"), tr("Koby is waiting for you at the town entrance"), 3.0)
 	else:
 		hud.show_message(tr("Whisky Peak"), 2.0)
 
@@ -40,7 +41,7 @@ func arrival_message(loaded: bool) -> void:
 func _interactables() -> Array:
 	var out := super()
 	if _nami_here():
-		out.append([nami, 3.4, "Hablar", _talk_to_nami])
+		out.append([nami, 3.4, "Talk", _talk_to_nami])
 	return out
 
 
@@ -60,57 +61,56 @@ func _talk_to_koby() -> void:
 	match mission:
 		Mission.NOT_GIVEN:
 			open_dialog("Koby", [
-				"¡Luffy-san, malas noticias! El vicealmirante Garp de la Marina llegó a Whisky Peak... ¡y dice que es tu abuelo!",
-				"Quiere llevarte a la Marina a puñetazos. Te espera en la meseta del gran cactus, al norte del pueblo.",
-				"Y en la plaza está Nami, la mejor navegante de East Blue. Sin ella nunca llegarán al Grand Line.",
-				tr("Dice que solo se unirá a una tripulación que le traiga %d mandarinas de los árboles entre los cactus.") % ORANGES_FOR_NAMI,
-				"Tu misión: ¡derrota a Garp, lleva las mandarinas a Nami y recluta a tu navegante!",
+				"Luffy-san, bad news! Vice Admiral Garp of the Marines arrived in Whisky Peak... and he says he's your grandfather!",
+				"He wants to drag you into the Marines with his fists. He's waiting for you on the great cactus plateau, north of the town.",
+				"And in the square is Nami, the best navigator in the East Blue. Without her you'll never reach the Grand Line.",
+				tr("She says she'll only join a crew that brings her %d tangerines from the trees among the cacti.") % ORANGES_FOR_NAMI,
+				"Garp is very strong: recruit Nami first so she can help you, then defeat Garp!",
 			], give_mission)
 		Mission.ACTIVE:
 			open_dialog("Koby", [_progress_line()])
 		_:
-			open_dialog("Koby", ["¡Increíble, Luffy-san! Algún día serás el Rey de los Piratas."])
+			open_dialog("Koby", ["Amazing, Luffy-san! Someday you'll be the King of the Pirates."])
 
 
 func _talk_to_nami() -> void:
 	if mission == Mission.NOT_GIVEN:
-		open_dialog("Nami", ["Hola. Soy Nami, la mejor navegante de East Blue.", "¿Un pirata? Hmm... habla primero con ese chico de la Marina de la entrada."])
+		open_dialog("Nami", ["Hi. I'm Nami, the best navigator in the East Blue.", "A pirate? Hmm... talk to that Marine boy at the entrance first."])
 		return
-	if not oranges_given and GameState.count_of("orange") >= ORANGES_FOR_NAMI:
-		GameState.remove_item("orange", ORANGES_FOR_NAMI)
+	if not oranges_given and GameState.party_take("orange", ORANGES_FOR_NAMI):
 		oranges_given = true
-		hud.show_message(tr("Le diste %d mandarinas a Nami") % ORANGES_FOR_NAMI, 2.0)
+		hud.show_message(tr("You gave Nami %d tangerines") % ORANGES_FOR_NAMI, 2.0)
 		_update_mission_text()
-	if oranges_given and boss.is_defeated():
+	if oranges_given:
 		open_dialog("Nami", [
-			"¡Mis mandarinas! Y además derrotaste al mismísimo Garp...",
-			"Está bien, capitán: desde hoy soy la navegante de los Piratas del Sombrero de Paja. ¡Rumbo al Grand Line!",
+			"My tangerines! All right, captain: from today I'm the navigator of the Straw Hat Pirates.",
+			"Garp, the hero of the Marines? He's incredibly strong... but together we'll beat him! Let's go to the great cactus plateau.",
 		], recruit)
-	elif oranges_given:
-		open_dialog("Nami", ["¡Gracias por las mandarinas! Ahora derrota a Garp en la meseta del gran cactus."])
 	else:
-		open_dialog("Nami", [tr("Todavía me faltan mandarinas: tienes %d de %d. Crecen entre las rocas de cactus.") % [GameState.count_of("orange"), ORANGES_FOR_NAMI]])
+		open_dialog("Nami", [tr("I still need tangerines: you have %d of %d. They grow among the cactus rocks.") % [GameState.party_count("orange"), ORANGES_FOR_NAMI]])
 
 
 func _progress_line() -> String:
-	if not boss.is_defeated():
-		return tr("Garp te espera en la meseta del gran cactus, al norte. ¡Lanza balas de cañón desde lejos!")
-	if not oranges_given:
-		return tr("Busca las mandarinas entre las rocas de cactus y llévaselas a Nami, en la plaza.")
-	return tr("¡Nami te espera en la plaza!")
+	if not recruited and not oranges_given:
+		return tr("Look for the tangerines among the cactus rocks and take them to Nami, in the square.")
+	if not recruited:
+		return tr("Nami is waiting for you in the square!")
+	return tr("Garp is waiting on the great cactus plateau, to the north. He throws cannonballs from far away!")
 
 
 func _mission_text() -> String:
 	if mission == Mission.NOT_GIVEN:
-		return tr("Habla con Koby en la entrada del pueblo")
+		return tr("Talk to Koby at the town entrance")
 	if mission == Mission.DONE:
-		return tr("¡Aventura completada!")
+		return tr("Adventure complete!")
 	var m := func(done: bool) -> String: return "[X]" if done else "[  ]"
-	var have := mini(GameState.count_of("orange"), ORANGES_FOR_NAMI) if not oranges_given else ORANGES_FOR_NAMI
+	if GameSession.is_played("nami"):
+		return "%s %s" % [m.call(boss.is_defeated()), tr("Defeat Vice Admiral Garp")]
+	var have := mini(GameState.party_count("orange"), ORANGES_FOR_NAMI) if not oranges_given else ORANGES_FOR_NAMI
 	return "%s %s\n%s %s\n%s %s" % [
-		m.call(boss.is_defeated()), tr("Derrota al vicealmirante Garp"),
-		m.call(oranges_given), tr("Lleva mandarinas a Nami (%d/%d)") % [have, ORANGES_FOR_NAMI],
-		m.call(recruited), tr("Recluta a Nami")]
+		m.call(oranges_given or recruited), tr("Bring tangerines to Nami (%d/%d)") % [have, ORANGES_FOR_NAMI],
+		m.call(recruited), tr("Recruit Nami"),
+		m.call(boss.is_defeated()), tr("Defeat Vice Admiral Garp")]
 
 
 func _mission_goals_done() -> bool:
@@ -122,4 +122,4 @@ func _on_item_taken(_item: Collectible) -> void:
 
 
 func _on_boss_down() -> void:
-	hud.show_message(tr("¡Derrotaste a Garp! Lleva las mandarinas a Nami"), 2.5)
+	hud.show_message(tr("You defeated Vice Admiral Garp!") if recruited else tr("You defeated Garp! Now recruit Nami"), 2.5)

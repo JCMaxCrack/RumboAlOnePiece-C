@@ -4,7 +4,7 @@ extends Control
 ## (as if it were a key), so the game code does not need to know about the touch screen.
 
 @export var action := "jump"
-@export var text := "Saltar"
+@export var text := "Jump"
 @export var color := Color(0.93, 0.78, 0.42)
 @export var font_size := 22
 

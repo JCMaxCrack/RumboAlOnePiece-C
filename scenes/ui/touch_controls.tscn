@@ -55,7 +55,7 @@ offset_bottom = -20.0
 mouse_filter = 2
 script = ExtResource("4_0l8t7")
 action = "attack"
-text = "Golpe"
+text = "Punch"
 font_size = 24
 
 [node name="InteractButton" type="Control" parent="Root" unique_id=273432006]
@@ -71,7 +71,7 @@ offset_bottom = -200.0
 mouse_filter = 2
 script = ExtResource("4_0l8t7")
 action = "interact"
-text = "Hablar"
+text = "Talk"
 
 [node name="PauseButton" type="Control" parent="Root" unique_id=2066805298]
 anchors_preset = 0

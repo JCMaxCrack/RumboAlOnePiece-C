@@ -29,7 +29,7 @@ func _ready() -> void:
 	interact_button.visible = false
 
 
-func set_interact_visible(on: bool, text: String = "Hablar") -> void:
+func set_interact_visible(on: bool, text: String = "Talk") -> void:
 	interact_button.visible = on
 	if interact_button.text != text:
 		interact_button.text = text

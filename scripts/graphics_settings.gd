@@ -17,11 +17,11 @@ signal changed
 
 enum Preset { LOW, MEDIUM, HIGH }
 
-const NAMES := ["Bajo", "Medio", "Alto"]
+const NAMES := ["Low", "Medium", "High"]
 const FILE := "user://ajustes.cfg"
 const PRESETS := {
 	Preset.LOW: {
-		"description": "Para teléfonos y PC de gama baja: sin sombras ni efectos, menos distancia.",
+		"description": "For phones and low-end PCs: no shadows or effects, shorter view distance.",
 		"shadows": false, "shadow_mode": DirectionalLight3D.SHADOW_ORTHOGONAL, "shadow_distance": 0.0, "shadow_atlas": 1024, "soft_shadows": 0,
 		"chunk_radius": 110.0, "camera_far": 320.0, "fog_density": 0.0034,
 		"grass_range": 30.0, "grass_density": 0.35, "bush_range": 65.0, "rock_range": 90.0, "terrain_detail_range": 60.0,
@@ -29,7 +29,7 @@ const PRESETS := {
 		"lights": 2, "light_distance": 18.0, "lod_threshold": 4.0, "occlusion": false,
 	},
 	Preset.MEDIUM: {
-		"description": "Equilibrado: sombras cercanas, brillo y más distancia de dibujo.",
+		"description": "Balanced: close shadows, glow and longer draw distance.",
 		"shadows": true, "shadow_mode": DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS, "shadow_distance": 60.0, "shadow_atlas": 2048, "soft_shadows": 1,
 		"chunk_radius": 160.0, "camera_far": 450.0, "fog_density": 0.0026,
 		"grass_range": 45.0, "grass_density": 0.65, "bush_range": 100.0, "rock_range": 140.0, "terrain_detail_range": 100.0,
@@ -37,7 +37,7 @@ const PRESETS := {
 		"lights": 6, "light_distance": 35.0, "lod_threshold": 2.0, "occlusion": true,
 	},
 	Preset.HIGH: {
-		"description": "Para PC potentes: sombras suaves lejanas, oclusión ambiental y toda la isla.",
+		"description": "For powerful PCs: soft distant shadows, ambient occlusion and the whole island.",
 		"shadows": true, "shadow_mode": DirectionalLight3D.SHADOW_PARALLEL_4_SPLITS, "shadow_distance": 110.0, "shadow_atlas": 4096, "soft_shadows": 3,
 		"chunk_radius": 240.0, "camera_far": 700.0, "fog_density": 0.0016,
 		"grass_range": 70.0, "grass_density": 1.0, "bush_range": 170.0, "rock_range": 230.0, "terrain_detail_range": 150.0,

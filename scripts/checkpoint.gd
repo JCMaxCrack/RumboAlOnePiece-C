@@ -9,7 +9,7 @@ signal reached(checkpoint: Checkpoint)
 
 ## Id saved in the JSON (it must be one of SaveManager.CHECKPOINT_IDS).
 @export var checkpoint_id := "playa_sur"
-@export var display_name := "Playa del sur"
+@export var display_name := "South Beach"
 @export var inactive_color := Color(0.75, 0.2, 0.15)
 @export var active_color := Color(1.0, 0.82, 0.25)
 

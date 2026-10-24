@@ -39,7 +39,7 @@ theme_override_constants/separation = 14
 layout_mode = 2
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
 theme_override_font_sizes/font_size = 30
-text = "Opciones gráficas"
+text = "Graphics options"
 horizontal_alignment = 1
 
 [node name="PresetRow" type="HBoxContainer" parent="Panel/VBox" unique_id=514179449]
@@ -50,18 +50,18 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
 theme_override_font_sizes/font_size = 20
-text = "Calidad"
+text = "Quality"
 
 [node name="PresetButton" type="OptionButton" parent="Panel/VBox/PresetRow" unique_id=1420438918]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 selected = 0
 item_count = 3
-popup/item_0/text = "Bajo"
+popup/item_0/text = "Low"
 popup/item_0/id = 0
-popup/item_1/text = "Medio"
+popup/item_1/text = "Medium"
 popup/item_1/id = 1
-popup/item_2/text = "Alto"
+popup/item_2/text = "High"
 popup/item_2/id = 2
 
 [node name="ScaleRow" type="HBoxContainer" parent="Panel/VBox" unique_id=645564939]
@@ -72,7 +72,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
 theme_override_font_sizes/font_size = 20
-text = "Resolución de render"
+text = "Render resolution"
 
 [node name="ScaleSlider" type="HSlider" parent="Panel/VBox/ScaleRow" unique_id=1053725167]
 custom_minimum_size = Vector2(200, 24)
@@ -99,7 +99,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
 theme_override_font_sizes/font_size = 20
-text = "Idioma"
+text = "Language"
 
 [node name="LanguageButton" type="OptionButton" parent="Panel/VBox/LanguageRow"]
 custom_minimum_size = Vector2(220, 0)
@@ -107,11 +107,11 @@ layout_mode = 2
 
 [node name="FullscreenCheck" type="CheckBox" parent="Panel/VBox" unique_id=501626632]
 layout_mode = 2
-text = "Pantalla completa  (F11 / Alt+Enter)"
+text = "Fullscreen  (F11 / Alt+Enter)"
 
 [node name="FpsCheck" type="CheckBox" parent="Panel/VBox" unique_id=776509971]
 layout_mode = 2
-text = "Mostrar FPS"
+text = "Show FPS"
 
 [node name="Info" type="Label" parent="Panel/VBox" unique_id=229960902]
 custom_minimum_size = Vector2(600, 70)
@@ -122,11 +122,11 @@ autowrap_mode = 3
 
 [node name="ControlsButton" type="Button" parent="Panel/VBox"]
 layout_mode = 2
-text = "Controles"
+text = "Controls"
 
 [node name="BackButton" type="Button" parent="Panel/VBox" unique_id=238681698]
 layout_mode = 2
-text = "Volver"
+text = "Back"
 
 [node name="ControlsMenu" parent="." instance=ExtResource("3_ctrl")]
 layout_mode = 1

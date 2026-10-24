@@ -40,7 +40,7 @@ center_offset = Vector3(0.63, 0, 0)
 collision_layer = 4
 floor_snap_length = 0.4
 script = ExtResource("1_fwej4")
-display_name = "Vicealmirante Garp"
+display_name = "Vice Admiral Garp"
 anim_library = "garp"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1017891572]
@@ -100,7 +100,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
 pixel_size = 0.006
 billboard = 1
 modulate = Color(1, 0.45, 0.4, 1)
-text = "Vicealmirante Garp"
+text = "Vice Admiral Garp"
 font_size = 46
 
 [editable path="Model"]

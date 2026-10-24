@@ -9,10 +9,10 @@ signal player_nearby_changed(near: bool)
 
 ## Lines Koby says when he gives the mission.
 @export_multiline var mission_lines: PackedStringArray = [
-	"¡Luffy-san! ¡Qué bueno que llegaste a la isla!",
-	"Buggy el Payaso se escondió en el cráter del volcán, en el centro de la isla, y tiene a todos aterrorizados.",
-	"Tu misión: ¡derrota a Buggy y recolecta toda la carne que está repartida por la isla!",
-	"Cada carne te devuelve vida. Y el Going Merry está anclado en la ensenada del noreste: sube por el puente del muelle.",
+	"Luffy-san! I'm so glad you made it to the island!",
+	"Buggy the Clown is hiding in the volcano crater, in the middle of the island, and he has everyone terrified.",
+	"Your mission: defeat Buggy and collect all the meat scattered around the island!",
+	"Every piece of meat gives you health back. And the Going Merry is anchored in the northeast inlet: go up the gangway from the dock.",
 ]
 
 @onready var model: Node3D = $Model

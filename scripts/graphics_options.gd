@@ -1,13 +1,13 @@
 class_name GraphicsOptions
 extends Control
-## "Opciones" panel (scenes/ui/graphics_options.tscn), used from the main menu and the pause menu.
+## "Options" panel (scenes/ui/graphics_options.tscn), used from the main menu and the pause menu.
 ## Quality preset (Bajo / Medio / Alto), render resolution slider, full screen, FPS counter,
 ## language (Preferences) and the controls (ControlsMenu, to change keys and gamepad buttons).
 ## Every change is applied at once and saved by GraphicsSettings / Preferences.
 
 signal closed
 
-const RENDERER_NAMES := {"forward_plus": "Forward+", "mobile": "Mobile", "gl_compatibility": "Compatibilidad (OpenGL)"}
+const RENDERER_NAMES := {"forward_plus": "Forward+", "mobile": "Mobile", "gl_compatibility": "Compatibility (OpenGL)"}
 
 @onready var preset_button: OptionButton = $Panel/VBox/PresetRow/PresetButton
 @onready var scale_slider: HSlider = $Panel/VBox/ScaleRow/ScaleSlider

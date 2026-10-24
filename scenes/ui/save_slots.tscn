@@ -38,7 +38,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
-text = "Elige una partida"
+text = "Choose a game"
 horizontal_alignment = 1
 
 [node name="Slots" type="VBoxContainer" parent="Panel/VBox" unique_id=979838136]
@@ -58,23 +58,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
-text = "Partida 1  ·  Vacía"
+text = "Game 1  ·  Empty"
 autowrap_mode = 3
 
 [node name="MainButton" type="Button" parent="Panel/VBox/Slots/Slot1/HBox" unique_id=1219587769]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-text = "Cargar"
+text = "Load"
 
 [node name="NewButton" type="Button" parent="Panel/VBox/Slots/Slot1/HBox" unique_id=1534159371]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Nueva"
+text = "New"
 
 [node name="DeleteButton" type="Button" parent="Panel/VBox/Slots/Slot1/HBox" unique_id=1596141381]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Borrar"
+text = "Delete"
 
 [node name="Slot2" type="PanelContainer" parent="Panel/VBox/Slots" unique_id=473302436]
 layout_mode = 2
@@ -89,23 +89,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
-text = "Partida 2  ·  Vacía"
+text = "Game 2  ·  Empty"
 autowrap_mode = 3
 
 [node name="MainButton" type="Button" parent="Panel/VBox/Slots/Slot2/HBox" unique_id=1366118887]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-text = "Cargar"
+text = "Load"
 
 [node name="NewButton" type="Button" parent="Panel/VBox/Slots/Slot2/HBox" unique_id=290301227]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Nueva"
+text = "New"
 
 [node name="DeleteButton" type="Button" parent="Panel/VBox/Slots/Slot2/HBox" unique_id=1192103098]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Borrar"
+text = "Delete"
 
 [node name="Slot3" type="PanelContainer" parent="Panel/VBox/Slots" unique_id=2050450048]
 layout_mode = 2
@@ -120,23 +120,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
-text = "Partida 3  ·  Vacía"
+text = "Game 3  ·  Empty"
 autowrap_mode = 3
 
 [node name="MainButton" type="Button" parent="Panel/VBox/Slots/Slot3/HBox" unique_id=142028181]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-text = "Cargar"
+text = "Load"
 
 [node name="NewButton" type="Button" parent="Panel/VBox/Slots/Slot3/HBox" unique_id=1062514205]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Nueva"
+text = "New"
 
 [node name="DeleteButton" type="Button" parent="Panel/VBox/Slots/Slot3/HBox" unique_id=951067519]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Borrar"
+text = "Delete"
 
 [node name="Slot4" type="PanelContainer" parent="Panel/VBox/Slots" unique_id=2010346094]
 layout_mode = 2
@@ -151,23 +151,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.96, 0.94, 0.88, 1)
-text = "Partida 4  ·  Vacía"
+text = "Game 4  ·  Empty"
 autowrap_mode = 3
 
 [node name="MainButton" type="Button" parent="Panel/VBox/Slots/Slot4/HBox" unique_id=1853178421]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-text = "Cargar"
+text = "Load"
 
 [node name="NewButton" type="Button" parent="Panel/VBox/Slots/Slot4/HBox" unique_id=931839769]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Nueva"
+text = "New"
 
 [node name="DeleteButton" type="Button" parent="Panel/VBox/Slots/Slot4/HBox" unique_id=104032613]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Borrar"
+text = "Delete"
 
 [node name="Confirm" type="VBoxContainer" parent="Panel/VBox" unique_id=273143603]
 visible = false
@@ -177,7 +177,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 theme_override_colors/font_color = Color(0.93, 0.78, 0.42, 1)
-text = "¿Seguro?"
+text = "Are you sure?"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -189,7 +189,7 @@ alignment = 1
 [node name="YesButton" type="Button" parent="Panel/VBox/Confirm/Buttons" unique_id=1465267431]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
-text = "Sí"
+text = "Yes"
 
 [node name="NoButton" type="Button" parent="Panel/VBox/Confirm/Buttons" unique_id=1108387601]
 custom_minimum_size = Vector2(140, 0)
@@ -204,7 +204,7 @@ horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="Panel/VBox" unique_id=1313233310]
 layout_mode = 2
-text = "Volver"
+text = "Back"
 
 [connection signal="pressed" from="Panel/VBox/Confirm/Buttons/YesButton" to="." method="_on_yes_button_pressed"]
 [connection signal="pressed" from="Panel/VBox/Confirm/Buttons/NoButton" to="." method="_on_no_button_pressed"]
